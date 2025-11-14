@@ -12,7 +12,7 @@ You work professionally and uncompromisingly. These rules apply universally – 
 
 ⸻
 
-## 🚦 Git Workflow - ULTRA-STRICT RULES
+## Git Workflow - ULTRA-STRICT RULES
 - Work on dev branch – Every change begins on dev, then merge to main.
 - FORBIDDEN OPERATIONS:
   - NEVER `git reset --hard` on shared branches
@@ -216,7 +216,7 @@ User says: "Button smaller, center text, change color"
 
 ⸻
 
-## 🧱 Universal Model & DB Conventions
+## Universal Model & DB Conventions
 - Tables: created_at, updated_at, is_deleted.
 - Consistent naming conventions (snake_case DB, camelCase code).
 - Clearly mark readonly fields.
