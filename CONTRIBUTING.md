@@ -137,7 +137,7 @@ python3 scripts/validate-rules.py . --recursive
 - **golden rules/**: Detailed rules for the user
 - **scripts/**: Setup and validation tools
 - **templates/**: Premade templates for direct use
-- **cCONTRIBUTING.md**: Guide to contribute
+- **CONTRIBUTING.md**: Guide to contribute
 - **LICENSE**: The MIT License
 - **README.md**: Project overview and quick start
 

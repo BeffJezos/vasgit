@@ -78,12 +78,14 @@ select_technology() {
     echo
     print_header "Select Your Technology Stack (Optional)"
     echo "1) Use workflow template as-is"
-    echo "2) JavaScript/Node.js (Solo Development)"
-    echo "3) Python (Solo Development)"
-    echo "4) React (Solo Development)"
-    echo "5) TypeScript (Solo Development)"
+    echo "2) React (Solo Development)"
+    echo "3) JavaScript/Node.js (Solo Development)"
+    echo "4) TypeScript (Solo Development)"
+    echo "5) Python (Solo Development)"
+    echo "6) Flutter/Dart (Solo Development)"
+    echo "7) Go (Solo Development)"
     
-    read -p "Choose technology (1-5): " tech_choice
+    read -p "Choose technology (1-7): " tech_choice
     
     case $tech_choice in
         1)
@@ -91,24 +93,28 @@ select_technology() {
             TECH_NAME="Generic Solo Workflow"
             ;;
         2)
-            
-            TECH_TEMPLATE="templates/examples/javascript-solo-rules.md"
-            TECH_NAME="JavaScript/Node.js Solo"
-            ;;
-
-        3)  
-            TECH_TEMPLATE="templates/examples/python-solo-rules.md"
-            TECH_NAME="Python Solo"
-            ;;
-        4)
-            
-            TECH_TEMPLATE="templates/examples/react-solo-rules.md"
+            TECH_TEMPLATE="examples/react-solo-rules.md"
             TECH_NAME="React Solo"
             ;;
-
-        5)  
-            TECH_TEMPLATE="templates/examples/typescript-solo-rules.md"
+        3)
+            TECH_TEMPLATE="examples/javascript-solo-rules.md"
+            TECH_NAME="JavaScript/Node.js Solo"
+            ;;
+        4)
+            TECH_TEMPLATE="examples/typescript-solo-rules.md"
             TECH_NAME="TypeScript Solo"
+            ;;
+        5)  
+            TECH_TEMPLATE="examples/python-solo-rules.md"
+            TECH_NAME="Python Solo"
+            ;;
+        6)
+            TECH_TEMPLATE="examples/flutter-solo-rules.md"
+            TECH_NAME="Flutter/Dart Solo"
+            ;;
+        7)
+            TECH_TEMPLATE="examples/go-solo-rules.md"
+            TECH_NAME="Go Solo"
             ;;
             
         *)
@@ -182,7 +188,7 @@ main() {
     echo "• Documentation: https://github.com/BeffJezos/vasgit"
     echo "• Issues: https://github.com/BeffJezos/vasgit/issues"
     
-    print_success "Happy coding!"
+    print_success "Setup complete."
 }
 
 # Run main function

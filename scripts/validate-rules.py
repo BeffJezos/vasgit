@@ -272,7 +272,7 @@ class RulesValidator:
                 template_files = list(directory.glob('*.md'))
             
             # Filter for template files (exclude README, docs, etc.)
-            template_files = [f for f in template_files if 'template' in f.name.lower() or 'workflow' in f.name.lower()]
+            template_files = [f for f in template_files if 'template' in f.name.lower() or 'workflow' in f.name.lower() or 'solo' in f.name.lower() or 'rules' in f.name.lower()]
             
             if template_files:
                 print(f"Found {len(template_files)} template files to validate")
