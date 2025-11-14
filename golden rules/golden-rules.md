@@ -64,13 +64,12 @@ AI: "Both logical changes committed separately!"
 - Starting chat without mentioning the rules
 - Saying "commit" instead of "top"  
 - Not testing changes before saying "top"
-- Letting the AI commit without your "top" confirmation
 
 ### **Do this instead:**
 - Always start with rule explanation
 - Always use "top" for confirmation
 - Always test changes first
-- Keep logical groups manageable (max 3 changes)
+- Keep logical groups manageable (max 3 changes for a commit)
 
 ⸻
 
@@ -81,12 +80,13 @@ AI: "Both logical changes committed separately!"
 Good: "Make button smaller, change color, fix icon alignment" → test → "top"
 Better: "top - and also make the navbar responsive and add dark mode toggle" → continue working
 Bad: Working on 10+ changes without any commits
+Optimal: Writing only ‘top’ will cost you an entire prompt, so it’s much more efficient to confirm the change with ‘top’ and give the AI an additional task at the same time. This keeps your workflow optimal. See Step 3 for more information.
 ```
 
 ### **2. Test everything before "top":**
 - Run your app/website
 - Check that changes work as expected
-- Only then say "top"
+- Only then say "top" + new task
 
 ### **3. Use "top" efficiently:**
 - **Combine with next instruction**: "top - and also add dark mode toggle"
@@ -117,6 +117,7 @@ Read the rules again and follow the 'top' workflow."
 ```
 "Follow the solo-workflow.md rules. Wait for 'top' before committing.
 One logical change = one commit."
+This should never happen, but the longer your chat becomes, the more likely it is that the AI will get confused. The observed rate of this occurring is about 0.1% to 1.0%.
 ```
 
 ### **Problem: Too many uncommitted changes**
@@ -128,7 +129,7 @@ One logical change = one commit."
 
 ⸻
 
-## 📋 **Quick Reference Checklist**
+## Quick Reference Checklist
 
 **At start of every chat:**
 - [ ] Tell AI to read and follow rules
