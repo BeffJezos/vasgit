@@ -15,45 +15,47 @@ Vasgit provides battle-tested development workflows specifically designed for AI
 - **Quality Assurance** through comprehensive rules and validation
 - **"Top" Confirmation System** for clean, logical commits
 - **Multi-IDE Support** for Cursor, GitHub Copilot, CodeWhisperer, and more
-- **Technology-Specific** templates for React, JavaScript, Python
+- **Technology-Specific** templates for React, JavaScript, TypeScript, Python, Flutter, Go
 
 ## Quick Start
 
-### 1. Clone Repository
+### Step 1: Clone Repository
 ```bash
 git clone https://github.com/BeffJezos/vasgit
 cd vasgit
 ```
 
-### 2. Manual Setup (Quick)
+### Step 2: Choose Setup Method
 
-#### For Solo Development
-```bash
-# Copy solo template
-cp templates/solo-workflow.md .ai-ide/rules
-```
-
-#### For Technology-Specific Rules
-```bash
-# Copy technology-specific template
-cp templates/examples/react-solo-rules.md .ai-ide/rules
-# or javascript-solo-rules.md, python-solo-rules.md, typescript-solo-rules.md
-```
-
-### 3. Run Automated Setup
+#### Option A: Automated Setup (Recommended)
 ```bash
 chmod +x scripts/setup.sh
 ./scripts/setup.sh
 ```
-
-### 4. Choose Your Workflow
 The setup script will guide you through:
-- Selecting your Git workflow (Solo Dev-First)
-- Choosing your technology stack
-- Configuring solo development rules
-- Automatic version management setup (no manual configuration needed)
+- Selecting your technology stack (React, JavaScript, TypeScript, Python, Flutter, Go, or generic)
+- Automatically copying the right template to `.ai-ide/rules`
+- Setting up your solo development workflow
 
-### 5. Start Using Your AI Assistant
+#### Option B: Manual Setup
+```bash
+# Copy technology-specific template (choose one)
+cp examples/react-solo-rules.md .ai-ide/rules
+# OR
+cp examples/javascript-solo-rules.md .ai-ide/rules
+# OR
+cp examples/typescript-solo-rules.md .ai-ide/rules
+# OR
+cp examples/python-solo-rules.md .ai-ide/rules
+# OR
+cp examples/flutter-solo-rules.md .ai-ide/rules
+# OR
+cp examples/go-solo-rules.md .ai-ide/rules
+# OR (fallback for other tech stacks)
+cp templates/solo-workflow.md .ai-ide/rules
+```
+
+### Step 3: Start Using Your AI Assistant
 Tell your AI assistant:
 ```
 "Please read and follow all rules in .ai-ide/rules. 
@@ -64,7 +66,7 @@ Pay special attention to the 'top' confirmation workflow."
 1. **Always start each chat** by asking your AI assistant to read and follow the rules
 2. **Keep uncommitted changes manageable** - commit when you have more than 3-5 logical groups
 3. **Use the "top" confirmation** - this prevents broken commits and maintains clean history
-4. **Read the Golden Rules** - see `golden-rules.md` for complete setup guide
+4. **Read the Golden Rules** - see [golden-rules.md](golden%20rules/golden-rules.md) for complete setup guide
 
 ## Available Workflows
 
@@ -83,19 +85,23 @@ Pay special attention to the 'top' confirmation workflow."
 ### Technology-Specific Templates
 - **React**: Component-based development with hooks and modern patterns
 - **JavaScript/Node.js**: Full-stack development with modern ES6+ features
-- **Python**: Backend/data science development with type hints and testing
 - **TypeScript**: Type-safe development with strict type checking
+- **Python**: Backend/data science development with type hints and testing
+- **Flutter/Dart**: Cross-platform mobile development with widgets
+- **Go**: Backend/CLI/microservices with performance focus
 
 ### Examples Available
 - **`react-solo-rules.md`**: React solo development with modern tooling
 - **`javascript-solo-rules.md`**: JavaScript/Node.js solo development
-- **`python-solo-rules.md`**: Python solo development for backend/data science
 - **`typescript-solo-rules.md`**: TypeScript solo development with strict type safety
+- **`python-solo-rules.md`**: Python solo development for backend/data science
+- **`flutter-solo-rules.md`**: Flutter/Dart solo development for mobile apps
+- **`go-solo-rules.md`**: Go solo development for backend/CLI tools
 
 ## Documentation
 
 - **[Git Workflows](docs/git-workflows.md)**: Detailed workflow explanations and best practices
-- **[Solo Workflow Golden Rules](golden rules/golden-rules.md)**: Complete "top" workflow guide
+- **[Solo Workflow Golden Rules](golden%20rules/golden-rules.md)**: Complete "top" workflow guide
 
 ## Validate Your Rules (Check Template Syntax)
 ```bash
@@ -128,6 +134,4 @@ I welcome contributions from the community! See [CONTRIBUTING.md](CONTRIBUTING.m
 
 ---
 
-**Made by Vasily aka BeffJezos.**
-
-Happy coding!
+Made by Vasily aka BeffJezos.
