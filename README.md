@@ -1,177 +1,137 @@
 # Vasgit
 
-![Vasgit Logo](VASGIT.png)
-
-> **Use at your own risk**: While the solo workflow has been extensively tested over hundreds of hours, always backup your work and test in non-production environments first.
+![Vasgit Logo](.vasgit/VASGIT.png)
 
 **Professional Git workflows and AI IDE rules for solo developers.**
 
-Vasgit is a collection of battle-tested development workflow templates specifically designed for AI-assisted solo development. Get clean Git history, professional commit standards, and robust version management with the "top" confirmation workflow.
+Vasgit is a collection of battle-tested development workflow templates for AI-assisted solo development. Get clean Git history, professional commit standards, and the "top" confirmation workflow that prevents broken commits.
 
 ## What is Vasgit?
 
-Vasgit is a **template repository** - not a framework or library. It provides ready-to-use AI IDE rules files that you copy into your own projects. Think of it as a cookbook: you pick the recipes (rules) you need for your specific tech stack.
+A **template repository** that provides ready-to-use AI IDE rules files. Not a framework or library - just templates you copy into your projects.
 
 ## Features
 
 - **Solo Dev-First Workflow** (battle-tested over hundreds of hours)
-- **Automated Commit Standards** with semantic versioning
-- **"Top" Confirmation System** for clean, logical commits
-- **Multi-IDE Support** for Cursor, GitHub Copilot, CodeWhisperer, and more
-- **Technology-Specific** templates for React, JavaScript, TypeScript, Python, Flutter, Go
+- **"Top" Confirmation System** prevents broken commits
+- **Semantic Versioning** with automated standards
+- **Technology-Specific Templates** for React, JavaScript, TypeScript, Python, Flutter, Go
+- **Multi-IDE Support** for Cursor, GitHub Copilot, and others
 
 ## Quick Start
 
-Choose your setup method based on your situation:
+### Option 1: GitHub Template (Recommended for New Projects)
 
-### For Existing Projects
+1. Click **"Use this template"** on GitHub
+2. Create your new repository
+3. Clone it: `git clone <your-repo>`
+4. Run setup: `bash .vasgit/scripts/setup.sh`
+5. Delete `.vasgit/` when done: `rm -rf .vasgit/`
 
-Copy the rules file for your tech stack into your project:
+### Option 2: Setup Script (For Any Project)
+
+For existing projects or manual setup:
 
 ```bash
-# Navigate to your project
+# For existing projects: navigate to your project
 cd ~/my-existing-project
 
-# Copy the rules file you need (choose one)
-curl -o .cursor/rules https://raw.githubusercontent.com/BeffJezos/vasgit/main/examples/flutter-solo-rules.md
-# OR for React:
-curl -o .cursor/rules https://raw.githubusercontent.com/BeffJezos/vasgit/main/examples/react-solo-rules.md
-# OR for Python:
-curl -o .cursor/rules https://raw.githubusercontent.com/BeffJezos/vasgit/main/examples/python-solo-rules.md
-# OR for JavaScript:
-curl -o .cursor/rules https://raw.githubusercontent.com/BeffJezos/vasgit/main/examples/javascript-solo-rules.md
-# OR for TypeScript:
-curl -o .cursor/rules https://raw.githubusercontent.com/BeffJezos/vasgit/main/examples/typescript-solo-rules.md
-# OR for Go:
-curl -o .cursor/rules https://raw.githubusercontent.com/BeffJezos/vasgit/main/examples/go-solo-rules.md
-
-# Tell your AI assistant:
-# "Read and follow the rules in .cursor/rules. Pay attention to the 'top' workflow."
-```
-
-### For New Projects
-
-**Option 1: Use GitHub Template (Recommended)**
-1. Click "Use this template" on GitHub
-2. Create your new repository
-3. Clone it and start coding
-
-**Option 2: Clone and Customize**
-```bash
-# Clone vasgit
+# For new projects: clone vasgit
 git clone https://github.com/BeffJezos/vasgit my-new-project
 cd my-new-project
 
-# Remove vasgit's git history
-rm -rf .git
-git init
-
-# Copy the rules you need
-cp examples/react-solo-rules.md .cursor/rules
-
-# Remove example files you don't need
-rm -rf examples/ templates/ golden\ rules/
-
-# Start your project
-git add .
-git commit -m "initial commit (v1.0.0)"
-```
-
-### Using the Setup Script
-
-For more interactive setup with validation:
-
-```bash
-# Clone vasgit
-git clone https://github.com/BeffJezos/vasgit
-cd vasgit
-
-# Run setup
-chmod +x scripts/setup.sh
-./scripts/setup.sh
+# Run setup script
+bash .vasgit/scripts/setup.sh
 
 # The script will:
-# - Ask for your target project path
+# - Ask if this is a new or existing project
+# - Let you choose your IDE (Cursor, Universal, GitHub Copilot)
 # - Let you choose your tech stack
-# - Copy the right rules file to your project
+# - Automatically create the right rules directory
+# - Copy the template to the right location
 ```
 
 ## How It Works
 
 ### The "Top" Confirmation Workflow
 
-Vasgit's core feature is the **"top" confirmation system**:
-
 1. **You give tasks** → "Add login screen, fix navigation, update colors"
 2. **AI makes changes** → All changes completed
 3. **You test** → Check everything works
 4. **You say "top"** → AI commits each logical change separately
 
-This prevents broken commits and maintains a clean Git history. Read the [golden rules](golden%20rules/golden-rules.md) for complete workflow guidance.
+This prevents broken commits and maintains clean Git history.
 
 ### Solo Dev-First Workflow
 
-All templates use the **dev-first workflow**:
+All templates follow the dev-first workflow:
+
 - Development on `dev` branch
 - Merge to `main` for releases with `--no-ff`
+- Semantic versioning (v0.X.Y+Z)
 - Clean, professional Git history
-- Battle-tested over hundreds of hours
 
 ## Available Technologies
 
-### Core Templates
-- **`solo-workflow.md`**: Universal solo development workflow
-- **`golden-rules.md`**: Complete setup and usage guide
+### React
+Component-based development with hooks, modern patterns, ESLint, React Testing Library.
 
-### Technology-Specific Templates
-- **React**: Component-based development with hooks and modern patterns
-- **JavaScript/Node.js**: Full-stack development with modern ES6+ features
-- **TypeScript**: Type-safe development with strict type checking
-- **Python**: Backend/data science development with type hints and testing
-- **Flutter/Dart**: Cross-platform mobile development with widgets
-- **Go**: Backend/CLI/microservices with performance focus
+### JavaScript/Node.js
+Full-stack development with ES6+, npm/yarn workflows, Jest testing.
 
-### Examples Available
-- **`react-solo-rules.md`**: React solo development with modern tooling
-- **`javascript-solo-rules.md`**: JavaScript/Node.js solo development
-- **`typescript-solo-rules.md`**: TypeScript solo development with strict type safety
-- **`python-solo-rules.md`**: Python solo development for backend/data science
-- **`flutter-solo-rules.md`**: Flutter/Dart solo development for mobile apps
-- **`go-solo-rules.md`**: Go solo development for backend/CLI tools
+### TypeScript
+Type-safe development with strict checking, no `any` types, comprehensive type definitions.
+
+### Python
+Backend/data science with type hints, black/flake8/mypy, pytest, dataclasses.
+
+### Flutter/Dart
+Cross-platform mobile with widgets, const constructors, Provider/Riverpod, widget tests.
+
+### Go
+Backend/CLI/microservices with explicit error handling, goroutines, table-driven tests.
+
+### Generic
+Fallback template for other tech stacks.
 
 ## Documentation
 
-- **[Git Workflows](docs/git-workflows.md)**: Detailed workflow explanations and best practices
-- **[Solo Workflow Golden Rules](golden%20rules/golden-rules.md)**: Complete "top" workflow guide
+- **[Golden Rules](.vasgit/golden-rules.md)**: Complete "top" workflow guide
+- **[Git Workflows](.vasgit/docs/git-workflows.md)**: Detailed workflow explanations
+- **[Contributing](.vasgit/CONTRIBUTING.md)**: How to contribute templates
 
-## Validate Your Rules (Check Template Syntax)
+## For New Projects: Cleaning Up
+
+After running setup in a new project created from template:
+
 ```bash
-python3 scripts/validate-rules.py .ai-ide/rules --verbose
+# Option 1: Keep golden rules for reference
+rm -rf .vasgit/examples .vasgit/templates .vasgit/scripts .vasgit/docs
+
+# Option 2: Remove everything
+rm -rf .vasgit/
+
+# Your project is now clean with just the rules file in place
 ```
-*This checks if your rules file has correct syntax and required sections*
 
 ## Installation for Different IDEs
 
-### Cursor IDE
-1. Place rules in `.cursor/rules` 
-2. Tell AI: "Read and follow the rules in .cursor/rules"
+The setup script handles this automatically, but manual paths:
 
-### GitHub Copilot
-1. Place rules in `.github/copilot-rules.md`
-2. Reference in your prompts
+- **Cursor**: `.cursor/rules`
+- **GitHub Copilot**: `.github/copilot-rules.md`
+- **Universal**: `.ai-ide/rules`
 
-### Universal Setup
-1. Place rules in `.ai-ide/rules`
-2. Works with any AI-powered IDE
+## Validate Your Rules
 
-## Contributing
+```bash
+python3 .vasgit/scripts/validate-rules.py <rules-file-path> --verbose
+```
 
-I welcome contributions from the community! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
+## Support
 
-- How to submit templates for new technologies
-- Guidelines for improving existing workflows
-- Testing and validation procedures
-- Documentation standards
+- **Documentation**: [github.com/BeffJezos/vasgit](https://github.com/BeffJezos/vasgit)
+- **Issues**: [github.com/BeffJezos/vasgit/issues](https://github.com/BeffJezos/vasgit/issues)
 
 ---
 
