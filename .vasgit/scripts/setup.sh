@@ -102,10 +102,12 @@ echo
 # IDE selection
 print_header "IDE Selection"
 echo "1) Cursor"
-echo "2) GitHub Copilot"
-echo "3) Universal (any AI IDE)"
+echo "2) Windsurf (Codeium)"
+echo "3) VS Code / Visual Studio (GitHub Copilot)"
+echo "4) JetBrains IDEs (IntelliJ, PyCharm, etc.)"
+echo "5) Universal (any AI IDE)"
 echo
-read -p "Choose IDE (1-3): " ide_choice
+read -p "Choose IDE (1-5): " ide_choice
 
 case $ide_choice in
     1)
@@ -114,11 +116,22 @@ case $ide_choice in
         IDE_NAME="Cursor"
         ;;
     2)
-        RULES_DIR=".github"
-        RULES_FILE="copilot-rules.md"
-        IDE_NAME="GitHub Copilot"
+        RULES_DIR=".wind"
+        RULES_FILE="rules"
+        IDE_NAME="Windsurf"
         ;;
     3)
+        RULES_DIR=".github"
+        RULES_FILE="copilot-instructions.md"
+        IDE_NAME="GitHub Copilot"
+        ;;
+    4)
+        RULES_DIR=".github"
+        RULES_FILE="copilot-instructions.md"
+        IDE_NAME="JetBrains with Copilot"
+        print_info "Note: JetBrains uses GitHub Copilot instructions"
+        ;;
+    5)
         RULES_DIR=".ai-ide"
         RULES_FILE="rules"
         IDE_NAME="Universal"
@@ -272,7 +285,10 @@ echo
 
 # GitHub Token Setup (Optional)
 print_header "GitHub Token Setup (Optional)"
-print_info "Want to enable AI auto-push? Setup GitHub token now."
+echo
+print_info "Enable AI to automatically push commits after 'top' confirmation."
+print_info "Best experience: No manual push commands needed."
+print_warning "Use at your own risk: Token gives push access to your repository."
 echo
 read -p "Setup GitHub token for automatic push? (y/N): " -n 1 -r
 echo
@@ -281,11 +297,16 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     print_header "GitHub Token Setup Guide"
     echo
-    print_info "Follow these steps to enable AI auto-push:"
+    print_info "Why Personal Access Token (not SSH)?"
+    echo "  • Tokens work better with AI tools (can be embedded in git URLs)"
+    echo "  • SSH keys are more secure but harder to configure for AI auto-push"
+    echo "  • Tokens can be easily revoked if compromised"
     echo
     
     echo "1. Go to GitHub.com → Settings → Developer settings"
     echo "   → Personal access tokens → Tokens (classic)"
+    echo
+    print_info "Note: NOT 'SSH and GPG keys' - that's for SSH protocol"
     echo
     read -p "Press Enter when ready to continue..."
     echo

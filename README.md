@@ -113,13 +113,15 @@ The setup script automatically cleans up unnecessary files and keeps only:
 
 Your project stays clean and ready for development.
 
-## Installation for Different IDEs
+## Supported IDEs
 
 The setup script handles this automatically, but manual paths:
 
 - **Cursor**: `.cursor/rules`
-- **GitHub Copilot**: `.github/copilot-rules.md`
-- **Universal**: `.ai-ide/rules`
+- **Windsurf**: `.wind/rules`
+- **VS Code / Visual Studio (Copilot)**: `.github/copilot-instructions.md`
+- **JetBrains (IntelliJ, PyCharm, etc.)**: `.github/copilot-instructions.md`
+- **Universal**: `.ai-ide/rules` (for any other AI IDE)
 
 ## Validate Your Rules
 
