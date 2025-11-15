@@ -379,3 +379,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 print_success "Done! Start coding with clean Git history."
+
+# Update hint
+if [ "$PROJECT_TYPE" = "existing" ]; then
+    echo
+    print_info "💡 Tip: Re-run this script anytime to update your rules to the latest version."
+fi

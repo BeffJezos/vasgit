@@ -100,6 +100,7 @@ Fallback template for other tech stacks.
 
 - **[Golden Rules](.vasgit/docs/golden-rules.md)**: Complete "top" workflow guide
 - **[Git Workflows](.vasgit/docs/git-workflows.md)**: Detailed workflow explanations
+- **[Updating](.vasgit/docs/updating.md)**: How to update vasgit rules
 - **[GitHub Token Setup](.vasgit/docs/github-token-setup.md)**: Enable AI auto-push (optional)
 - **[Contributing](.vasgit/CONTRIBUTING.md)**: How to contribute templates
 
@@ -122,6 +123,25 @@ The setup script handles this automatically, but manual paths:
 - **VS Code / Visual Studio (Copilot)**: `.github/copilot-instructions.md`
 - **JetBrains (IntelliJ, PyCharm, etc.)**: `.github/copilot-instructions.md`
 - **Universal**: `.ai-ide/rules` (for any other AI IDE)
+
+## Getting Updates
+
+Vasgit is a template - you get a snapshot when you create your project. To update to the latest rules:
+
+**Quick Update:**
+```bash
+# Re-run the setup script (backs up your current rules automatically)
+cd /tmp && git clone https://github.com/BeffJezos/vasgit
+bash vasgit/.vasgit/scripts/setup.sh  # Choose "existing project"
+```
+
+**Manual Update:**
+```bash
+# Download latest rules for your tech stack
+curl -o .cursor/rules https://raw.githubusercontent.com/BeffJezos/vasgit/main/.vasgit/examples/react-solo-rules.md
+```
+
+Read the full [update guide](.vasgit/docs/updating.md) for details.
 
 ## Validate Your Rules
 
