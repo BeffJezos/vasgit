@@ -256,30 +256,33 @@ echo "  • Tech Stack: $TECH_NAME"
 echo "  • Rules File: $RULES_DIR/$RULES_FILE"
 echo
 
-print_header "Next Steps:"
-echo "1. Read the golden rules:"
-echo "   .vasgit/docs/golden-rules.md"
+print_header "🚀 Get Started (3 Steps):"
 echo
-echo "2. Open your project in $IDE_NAME"
+echo "1. Read the golden rules (5 min):"
+echo "   \$ less .vasgit/docs/golden-rules.md"
 echo
-echo "3. Tell your AI:"
-echo "   'Read and follow the rules in $RULES_DIR/$RULES_FILE'"
-echo "   'Pay special attention to the top confirmation workflow'"
+echo "2. Open your AI in $IDE_NAME and tell it:"
+echo "   'Read and follow the rules in $RULES_DIR/$RULES_FILE."
+echo "   Pay special attention to the top confirmation workflow.'"
 echo
-echo "4. Initialize Git (if new project):"
+echo "3. Try the 'top' workflow (if new project):"
+echo "   Say: 'top - initialize this project'"
+echo
+print_info "Your AI will automatically run:"
 if [ "$WORKFLOW_TYPE" = "dev-first" ]; then
     echo "   git init"
     echo "   git add ."
-    echo "   git commit -m 'initial commit (v1.0.0)'"
+    echo "   git commit -m 'initial commit (v0.1.0)'"
     echo "   git branch dev"
     echo "   git checkout dev"
 else
     echo "   git init"
     echo "   git add ."
-    echo "   git commit -m 'initial commit (v1.0.0)'"
+    echo "   git commit -m 'initial commit (v0.1.0)'"
 fi
 echo
-
+print_success "That's it! Start coding with clean Git history."
+echo
 print_info "Read workflow details: .vasgit/docs/git-workflows.md"
 echo
 
