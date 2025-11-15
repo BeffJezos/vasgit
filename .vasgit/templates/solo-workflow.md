@@ -284,21 +284,38 @@ These rules are repeated because they are CRITICAL and must NEVER be violated:
 ### **NEW PROJECT SETUP (CRITICAL!)**
 **When user says "top" to initialize a new vasgit project:**
 
-Check if git exists:
+Check if git exists with GitHub's initial commit:
 ```bash
-git log --oneline -1
+git log --oneline -1 2>/dev/null
 ```
 
-**If initial commit exists (from cloning vasgit):**
-- This is the SECOND commit
-- Use version: v0.1.1+2
-- Message: `chore: apply vasgit workflow (v0.1.1+2)`
-- This showcases the versioning system!
+**If git exists (from GitHub template clone):**
+- Delete and reinitialize for clean history!
+- Execute these commands:
+```bash
+rm -rf .git
+git init
+git add .
+git commit -m "initial commit (v0.1.0+1)"
+git branch dev
+git checkout dev
+```
 
 **If no git repo exists:**
-- This is the FIRST commit
-- Use version: v0.1.0+1
-- Message: `initial commit (v0.1.0+1)`
+- Initialize fresh:
+```bash
+git init
+git add .
+git commit -m "initial commit (v0.1.0+1)"
+git branch dev
+git checkout dev
+```
+
+**Why reinitialize?**
+- Clean history from day 1 (no GitHub cruft)
+- Correct author (not "GitHub <noreply@github.com>")
+- Proper version (v0.1.0+1)
+- Showcases the vasgit system perfectly!
 
 ### **VERSION VALIDATION (CRITICAL!)**
 **NEVER "INVENT" VERSIONS - ALWAYS CHECK GIT LOG FIRST!**
