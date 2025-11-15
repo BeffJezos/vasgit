@@ -266,9 +266,9 @@ echo "   'Read and follow the rules in $RULES_DIR/$RULES_FILE."
 echo "   Pay special attention to the top confirmation workflow.'"
 echo
 echo "3. Try the 'top' workflow (if new project):"
-echo "   Say: 'top - initialize this project'"
+echo "   Just say: 'top'"
 echo
-print_info "Your AI will automatically run:"
+print_info "Your AI will automatically initialize git and commit!"
 if [ "$WORKFLOW_TYPE" = "dev-first" ]; then
     echo "   git init"
     echo "   git add ."
@@ -280,6 +280,9 @@ else
     echo "   git add ."
     echo "   git commit -m 'initial commit (v0.1.0)'"
 fi
+echo
+print_info "Note: Normally combine 'top' with next task: 'top - add dark mode'"
+print_info "      This time it's just for showcase!"
 echo
 print_success "That's it! Start coding with clean Git history."
 echo
