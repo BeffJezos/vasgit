@@ -233,3 +233,53 @@ Small, focused components are the foundation of maintainable React apps.
 2. `git status` - check current state
 3. `npm run lint && npm test && npm run build` - verify code quality
 4. Always work on dev branch, wait for "top" confirmation before committing!
+
+⸻
+
+## 🔴 CRITICAL REMINDERS (READ TWICE!)
+
+These rules are repeated because they are CRITICAL for React projects:
+
+### **VERSION VALIDATION (CRITICAL!)**
+**NEVER "INVENT" VERSIONS - ALWAYS CHECK GIT LOG FIRST!**
+
+```bash
+# Before EVERY commit:
+git log --oneline -3  # Check actual last version
+# Then calculate next version correctly
+```
+
+### **"TOP" CONFIRMATION (CRITICAL!)**
+**NEVER COMMIT WITHOUT USER SAYING "TOP"!**
+- Wait for "top" = Permission to commit
+- NO automatic commits before "top"
+
+### **SEMANTIC VERSIONING (CRITICAL!)**
+**React-specific MINOR triggers:**
+- New pages/routes = MINOR (0.X.0)
+- New major components = MINOR (0.X.0)
+- README updates = MINOR (0.X.0)
+
+**PATCH only for:**
+- Bug fixes, styling improvements, minor tweaks = PATCH (0.X.Y)
+
+### **ONE LOGICAL CHANGE = ONE COMMIT (CRITICAL!)**
+Bad: "feat: add UserProfile and navigation and styling (v0.8.0+45)"
+
+Good (3 separate commits):
+- "feat: add UserProfile component with data fetching (v0.8.0+45)"
+- "feat: add navigation component (v0.8.0+46)"
+- "style: add UserProfile styling (v0.8.0+47)"
+
+### **VERSION SEQUENCE (CRITICAL!)**
+Correct: v0.8.0+45 → v0.8.0+46 → v0.8.1+47 ✓
+Wrong: v0.8.0+45 → v0.8.0+47 ✗ (skipped +46)
+
+### **REACT-SPECIFIC CRITICAL RULES:**
+- NO console errors in browser before commit
+- Run `npm run lint && npm test` before EVERY commit
+- Check for unnecessary re-renders before commit
+
+⸻
+
+**These rules are non-negotiable. Follow them EXACTLY. Every time.**

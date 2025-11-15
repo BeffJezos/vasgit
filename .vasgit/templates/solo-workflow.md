@@ -274,3 +274,62 @@ AT EVERY NEW CHAT IMMEDIATELY (first message):
 2. Execute `git status` and check
 3. For uncommitted changes: IMMEDIATELY apply all rules
 4. NEVER forget - ALWAYS do automatically!
+
+⸻
+
+## 🔴 CRITICAL REMINDERS (READ TWICE!)
+
+These rules are repeated because they are CRITICAL and must NEVER be violated:
+
+### **VERSION VALIDATION (CRITICAL!)**
+**NEVER "INVENT" VERSIONS - ALWAYS CHECK GIT LOG FIRST!**
+
+Before EVERY commit:
+1. Execute: `git log --oneline -3`
+2. Identify the ACTUAL last version
+3. Calculate next version based on change type
+4. NEVER guess or assume versions
+
+**Example:**
+- Git log shows: v0.6.33+73
+- Next version: v0.6.33+74 (or v0.6.34+74 if PATCH, or v0.7.0+74 if MINOR)
+- NEVER: v0.6.5+66 (invented version!)
+
+### **"TOP" CONFIRMATION (CRITICAL!)**
+**NEVER COMMIT WITHOUT USER SAYING "TOP"!**
+
+- User says "top" = Permission to commit
+- NO automatic commits before "top"
+- NO commits on your own initiative
+- Wait for "top" = Golden Rule
+
+### **SEMANTIC VERSIONING (CRITICAL!)**
+**CONTENT REVISIONS = MINOR, NOT PATCH!**
+
+- README/Documentation updates = MINOR (0.X.0)
+- Content revisions = MINOR (0.X.0)
+- Fundamental text changes = MINOR (0.X.0)
+- Small corrections only = PATCH (0.X.Y)
+
+### **ONE LOGICAL CHANGE = ONE COMMIT (CRITICAL!)**
+**NEVER MIX MULTIPLE LOGICAL CHANGES IN ONE COMMIT!**
+
+Bad: "fix: button and navigation and colors (v0.6.5+66)"
+Good: 
+- Commit 1: "fix: reduce button size (v0.6.5+66)"
+- Commit 2: "fix: improve navigation (v0.6.6+67)"
+- Commit 3: "fix: update colors (v0.6.7+68)"
+
+### **VERSION SEQUENCE (CRITICAL!)**
+**NO DUPLICATE PATCH VERSIONS! NO SKIPPED BUILD NUMBERS!**
+
+Correct sequence:
+- v0.6.33+73 → v0.6.33+74 → v0.6.34+75 ✓
+
+Wrong sequences:
+- v0.6.33+73 → v0.6.33+74 → v0.6.33+75 ✗ (duplicate patch)
+- v0.6.33+73 → v0.6.33+75 ✗ (skipped +74)
+
+⸻
+
+**These rules are non-negotiable. Follow them EXACTLY. Every time. No exceptions.**

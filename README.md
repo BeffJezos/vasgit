@@ -104,6 +104,7 @@ Fallback template for other tech stacks.
 
 - **[Golden Rules](.vasgit/docs/golden-rules.md)**: Complete "top" workflow guide
 - **[Git Workflows](.vasgit/docs/git-workflows.md)**: Detailed workflow explanations
+- **[GitHub Token Setup](.vasgit/docs/github-token-setup.md)**: Enable AI auto-push (optional)
 - **[Contributing](.vasgit/CONTRIBUTING.md)**: How to contribute templates
 
 ## After Setup

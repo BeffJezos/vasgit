@@ -330,3 +330,41 @@ Explicit error handling is the foundation of reliable Go code.
 3. `go fmt ./... && go vet ./... && go test ./... -race` - verify code quality
 4. Always work on dev branch, wait for "top" confirmation before committing!
 
+
+⸻
+
+## 🔴 CRITICAL REMINDERS (READ TWICE!)
+
+These rules are repeated because they are CRITICAL:
+
+### **VERSION VALIDATION (CRITICAL!)**
+**NEVER "INVENT" VERSIONS - ALWAYS CHECK GIT LOG FIRST!**
+
+Before EVERY commit:
+1. Execute: `git log --oneline -3`
+2. Identify the ACTUAL last version
+3. Calculate next version based on change type
+4. NEVER guess or assume versions
+
+### **"TOP" CONFIRMATION (CRITICAL!)**
+**NEVER COMMIT WITHOUT USER SAYING "TOP"!**
+- User says "top" = Permission to commit
+- NO automatic commits before "top"
+
+### **SEMANTIC VERSIONING (CRITICAL!)**
+- README/Documentation updates = MINOR (0.X.0)
+- New features = MINOR (0.X.0)
+- Bug fixes = PATCH (0.X.Y)
+
+### **ONE LOGICAL CHANGE = ONE COMMIT (CRITICAL!)**
+NEVER MIX MULTIPLE LOGICAL CHANGES IN ONE COMMIT!
+
+### **VERSION SEQUENCE (CRITICAL!)**
+NO DUPLICATE PATCH VERSIONS! NO SKIPPED BUILD NUMBERS!
+
+Correct: v0.8.0+45 → v0.8.0+46 → v0.8.1+47 ✓
+Wrong: v0.8.0+45 → v0.8.0+47 ✗ (skipped +46)
+
+⸻
+
+**These rules are non-negotiable. Follow them EXACTLY. Every time.**
