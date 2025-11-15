@@ -156,4 +156,4 @@ python3 .vasgit/scripts/validate-rules.py <rules-file-path> --verbose
 
 ---
 
-Made by Vasily aka BeffJezos.
+Made by Vasya aka BeffJezos.
