@@ -281,6 +281,25 @@ AT EVERY NEW CHAT IMMEDIATELY (first message):
 
 These rules are repeated because they are CRITICAL and must NEVER be violated:
 
+### **NEW PROJECT SETUP (CRITICAL!)**
+**When user says "top" to initialize a new vasgit project:**
+
+Check if git exists:
+```bash
+git log --oneline -1
+```
+
+**If initial commit exists (from cloning vasgit):**
+- This is the SECOND commit
+- Use version: v0.1.1+2
+- Message: `chore: apply vasgit workflow (v0.1.1+2)`
+- This showcases the versioning system!
+
+**If no git repo exists:**
+- This is the FIRST commit
+- Use version: v0.1.0+1
+- Message: `initial commit (v0.1.0+1)`
+
 ### **VERSION VALIDATION (CRITICAL!)**
 **NEVER "INVENT" VERSIONS - ALWAYS CHECK GIT LOG FIRST!**
 
