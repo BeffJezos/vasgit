@@ -100,7 +100,6 @@ Fallback template for other tech stacks.
 
 - **[Golden Rules](.vasgit/docs/golden-rules.md)**: Complete "top" workflow guide
 - **[Git Workflows](.vasgit/docs/git-workflows.md)**: Detailed workflow explanations
-- **[Updating](.vasgit/docs/updating.md)**: How to update vasgit rules
 - **[GitHub Token Setup](.vasgit/docs/github-token-setup.md)**: Enable AI auto-push (optional)
 - **[Contributing](.vasgit/CONTRIBUTING.md)**: How to contribute templates
 
@@ -140,8 +139,6 @@ bash vasgit/.vasgit/scripts/setup.sh  # Choose "existing project"
 # Download latest rules for your tech stack
 curl -o .cursor/rules https://raw.githubusercontent.com/BeffJezos/vasgit/main/.vasgit/examples/react-solo-rules.md
 ```
-
-Read the full [update guide](.vasgit/docs/updating.md) for details.
 
 ## Validate Your Rules
 
