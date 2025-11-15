@@ -11,6 +11,7 @@ A **template repository** with battle-tested development workflow templates for 
 - **Semantic Versioning** with automated standards
 - **Technology-Specific Templates** for React, JavaScript, TypeScript, Python, Flutter, Go
 - **Multi-IDE Support** for Cursor, GitHub Copilot, and others
+- **Cross-Platform Setup** for Windows (PowerShell/Git Bash), Linux, and macOS
 
 ## Quick Start
 
@@ -19,13 +20,31 @@ A **template repository** with battle-tested development workflow templates for 
 1. Click **"Use this template"** on GitHub
 2. Create your new repository
 3. Clone it: `git clone <your-repo>`
-4. Run setup: `bash .vasgit/scripts/setup.sh`
+4. Run setup:
+   - **Windows**: `setup.bat` (auto-detects PowerShell or Git Bash)
+   - **Linux/Mac**: `bash .vasgit/scripts/setup.sh`
 5. Setup automatically cleans up unnecessary files
 
 **The setup script will ask you about workflow and tech stack, then automatically remove all unnecessary files.**
 
 ### Option 2: Existing Projects
 
+**Windows (PowerShell):**
+```powershell
+# Navigate to your existing project
+cd C:\Projects\my-existing-project
+
+# Clone vasgit temporarily
+git clone https://github.com/BeffJezos/vasgit $env:TEMP\vasgit
+
+# Run setup (it will ask for your project path)
+pwsh $env:TEMP\vasgit\.vasgit\scripts\setup.ps1
+
+# Cleanup
+Remove-Item -Recurse -Force $env:TEMP\vasgit
+```
+
+**Linux/Mac (Bash):**
 ```bash
 # Navigate to your existing project
 cd ~/my-existing-project
@@ -38,12 +57,12 @@ bash /tmp/vasgit/.vasgit/scripts/setup.sh
 
 # Cleanup
 rm -rf /tmp/vasgit
-
-# The script will:
-# - Copy the rules file to your project
-# - Ask you about workflow and tech stack
-# - Create the correct IDE directory (.cursor/, .ai-ide/, etc.)
 ```
+
+**The script will:**
+- Copy the rules file to your project
+- Ask you about workflow and tech stack
+- Create the correct IDE directory (.cursor/, .ai-ide/, etc.)
 
 ## How It Works
 
@@ -127,16 +146,26 @@ The setup script handles this automatically, but manual paths:
 
 Vasgit is a template - you get a snapshot when you create your project. To update to the latest rules:
 
-**Quick Update:**
+**Quick Update (Windows):**
+```powershell
+# Re-run the setup script (backs up your current rules automatically)
+cd $env:TEMP
+git clone https://github.com/BeffJezos/vasgit
+pwsh vasgit\.vasgit\scripts\setup.ps1  # Choose "existing project"
+Remove-Item -Recurse -Force vasgit
+```
+
+**Quick Update (Linux/Mac):**
 ```bash
 # Re-run the setup script (backs up your current rules automatically)
 cd /tmp && git clone https://github.com/BeffJezos/vasgit
 bash vasgit/.vasgit/scripts/setup.sh  # Choose "existing project"
+rm -rf vasgit
 ```
 
 **Manual Update:**
 ```bash
-# Download latest rules for your tech stack
+# Download latest rules for your tech stack (example: React)
 curl -o .cursor/rules https://raw.githubusercontent.com/BeffJezos/vasgit/main/.vasgit/examples/react-solo-rules.md
 ```
 
