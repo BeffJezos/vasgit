@@ -282,27 +282,19 @@ AT EVERY NEW CHAT IMMEDIATELY (first message):
 These rules are repeated because they are CRITICAL and must NEVER be violated:
 
 ### **NEW PROJECT SETUP (CRITICAL!)**
-**When user says "top" to initialize a new vasgit project:**
+**🚨 WHEN USER SAYS "top" - YOU MUST DO THIS FIRST! 🚨**
 
-Check if git exists with GitHub's initial commit:
+**STEP 1: Check if git exists**
 ```bash
 git log --oneline -1 2>/dev/null
 ```
 
-**If git exists (from GitHub template clone):**
-- Delete and reinitialize for clean history!
-- Execute these commands:
+**STEP 2: If git exists → DELETE IT and start fresh!**
 ```bash
 rm -rf .git
-git init
-git add .
-git commit -m "initial commit (v0.1.0+1)"
-git branch dev
-git checkout dev
 ```
 
-**If no git repo exists:**
-- Initialize fresh:
+**STEP 3: Initialize clean git repo**
 ```bash
 git init
 git add .
@@ -311,11 +303,9 @@ git branch dev
 git checkout dev
 ```
 
-**Why reinitialize?**
-- Clean history from day 1 (no GitHub cruft)
-- Correct author (not "GitHub <noreply@github.com>")
-- Proper version (v0.1.0+1)
-- Showcases the vasgit system perfectly!
+**WHY?** To remove GitHub's "Initial commit" and create a clean history with proper author and versioning!
+
+**THIS IS NOT OPTIONAL - ALWAYS DO THIS FOR NEW VASGIT PROJECTS!**
 
 ### **VERSION VALIDATION (CRITICAL!)**
 **NEVER "INVENT" VERSIONS - ALWAYS CHECK GIT LOG FIRST!**
