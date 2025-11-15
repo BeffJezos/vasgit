@@ -2,11 +2,7 @@
 
 **Professional Git workflows and AI IDE rules for solo developers.**
 
-Vasgit is a collection of battle-tested development workflow templates for AI-assisted solo development. Get clean Git history, professional commit standards, and the "top" confirmation workflow that prevents broken commits.
-
-## What is Vasgit?
-
-A **template repository** that provides ready-to-use AI IDE rules files. Not a framework or library - just templates you copy into your projects.
+A **template repository** with battle-tested development workflow templates for AI-assisted solo development. Not a framework or library - just ready-to-use rules files you copy into your projects. Get clean Git history, professional commit standards, and the "top" confirmation workflow that prevents broken commits.
 
 ## Features
 
@@ -18,35 +14,35 @@ A **template repository** that provides ready-to-use AI IDE rules files. Not a f
 
 ## Quick Start
 
-### Option 1: GitHub Template (Recommended for New Projects)
+### Option 1: GitHub Template (New Projects)
 
 1. Click **"Use this template"** on GitHub
 2. Create your new repository
 3. Clone it: `git clone <your-repo>`
 4. Run setup: `bash .vasgit/scripts/setup.sh`
-5. Delete `.vasgit/` when done: `rm -rf .vasgit/`
+5. Setup automatically cleans up unnecessary files
 
-### Option 2: Setup Script (For Any Project)
+**The setup script will ask you about workflow and tech stack, then automatically remove all unnecessary files.**
 
-For existing projects or manual setup:
+### Option 2: Existing Projects
 
 ```bash
-# For existing projects: navigate to your project
+# Navigate to your existing project
 cd ~/my-existing-project
 
-# For new projects: clone vasgit
-git clone https://github.com/BeffJezos/vasgit my-new-project
-cd my-new-project
+# Clone vasgit temporarily
+git clone https://github.com/BeffJezos/vasgit /tmp/vasgit
 
-# Run setup script
-bash .vasgit/scripts/setup.sh
+# Run setup (it will ask for your project path)
+bash /tmp/vasgit/.vasgit/scripts/setup.sh
+
+# Cleanup
+rm -rf /tmp/vasgit
 
 # The script will:
-# - Ask if this is a new or existing project
-# - Let you choose your IDE (Cursor, Universal, GitHub Copilot)
-# - Let you choose your tech stack
-# - Automatically create the right rules directory
-# - Copy the template to the right location
+# - Copy the rules file to your project
+# - Ask you about workflow and tech stack
+# - Create the correct IDE directory (.cursor/, .ai-ide/, etc.)
 ```
 
 ## How It Works
