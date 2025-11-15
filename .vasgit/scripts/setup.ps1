@@ -245,8 +245,12 @@ if ($PROJECT_TYPE -eq "new" -and (Test-Path (Join-Path $TARGET_DIR ".vasgit"))) 
     Remove-Item (Join-Path $vasgit_dir "scripts") -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item (Join-Path $vasgit_dir "VASGIT.png") -Force -ErrorAction SilentlyContinue
     
+    # Remove setup files from root
+    Remove-Item (Join-Path $TARGET_DIR "setup.bat") -Force -ErrorAction SilentlyContinue
+    
     Write-Success "Cleaned up .vasgit\ directory"
     Write-Info "Kept: docs\, CONTRIBUTING.md, LICENSE"
+    Write-Success "Removed setup files (no longer needed)"
     Write-Host ""
 }
 

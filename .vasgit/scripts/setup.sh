@@ -241,8 +241,13 @@ if [ "$PROJECT_TYPE" = "new" ] && [ -d "$TARGET_DIR/.vasgit" ]; then
     cd "$TARGET_DIR/.vasgit"
     rm -rf examples templates scripts VASGIT.png
     
+    # Remove setup files from root
+    cd "$TARGET_DIR"
+    rm -f setup.bat
+    
     print_success "Cleaned up .vasgit/ directory"
     print_info "Kept: docs/, CONTRIBUTING.md, LICENSE"
+    print_success "Removed setup files (no longer needed)"
     echo
 fi
 
