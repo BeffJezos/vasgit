@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Vasgit Setup Script
-# Intelligent setup for any project type
+# Intelligent setup with automatic cleanup
 
 set -e
 
@@ -46,6 +46,39 @@ case $project_type in
             exit 1
         fi
         print_success "Target: $TARGET_DIR"
+        ;;
+    *)
+        print_error "Invalid choice"
+        exit 1
+        ;;
+esac
+
+echo
+
+# Git Workflow selection
+print_header "Git Workflow"
+echo "1) Dev-First with no-ff merges (Recommended)"
+echo "   • Development on dev branch"
+echo "   • Merge to main with --no-ff for releases"
+echo "   • Clear release points in history"
+echo
+echo "2) Linear workflow"
+echo "   • All work directly on main"
+echo "   • Simplest possible history"
+echo "   • Good for small projects"
+echo
+read -p "Choose workflow (1-2): " workflow_choice
+
+case $workflow_choice in
+    1)
+        WORKFLOW_TYPE="dev-first"
+        WORKFLOW_NAME="Dev-First (no-ff)"
+        print_success "Selected: Dev-First workflow with no-ff merges"
+        ;;
+    2)
+        WORKFLOW_TYPE="linear"
+        WORKFLOW_NAME="Linear"
+        print_success "Selected: Linear workflow"
         ;;
     *)
         print_error "Invalid choice"
@@ -175,30 +208,54 @@ cp "$TEMPLATE" "$FULL_RULES_PATH"
 print_success "Copied $TECH_NAME rules to $RULES_DIR/$RULES_FILE"
 echo
 
-# Setup complete
-print_header "Setup Complete!"
-echo
-print_info "Next steps:"
-echo "1. Open your project in $IDE_NAME"
-echo "2. Tell your AI: 'Read and follow the rules in $RULES_DIR/$RULES_FILE'"
-echo "3. Mention the 'top' confirmation workflow"
-echo "4. Start coding with clean Git history!"
-echo
-
-# New project cleanup offer
-if [ "$PROJECT_TYPE" = "new" ]; then
-    echo
-    print_header "Clean Up (Optional)"
-    print_info "You can now remove the .vasgit/ directory:"
-    echo
-    echo "  # Keep golden rules for reference:"
-    echo "  rm -rf .vasgit/examples .vasgit/templates .vasgit/scripts .vasgit/docs"
-    echo
-    echo "  # Or remove everything:"
-    echo "  rm -rf .vasgit/"
+# Cleanup for new projects
+if [ "$PROJECT_TYPE" = "new" ] && [ -d "$TARGET_DIR/.vasgit" ]; then
+    print_header "Cleaning Up"
+    print_info "Removing unnecessary files..."
+    
+    # Keep only docs/, CONTRIBUTING.md, LICENSE
+    cd "$TARGET_DIR/.vasgit"
+    rm -rf examples templates scripts VASGIT.png
+    
+    print_success "Cleaned up .vasgit/ directory"
+    print_info "Kept: docs/, CONTRIBUTING.md, LICENSE"
     echo
 fi
 
-print_info "Read the golden rules: .vasgit/golden-rules.md"
+# Setup complete
+print_header "Setup Complete!"
 echo
-print_success "Done!"
+print_success "Configuration:"
+echo "  • Workflow: $WORKFLOW_NAME"
+echo "  • IDE: $IDE_NAME"
+echo "  • Tech Stack: $TECH_NAME"
+echo "  • Rules File: $RULES_DIR/$RULES_FILE"
+echo
+
+print_header "Next Steps:"
+echo "1. Read the golden rules:"
+echo "   .vasgit/docs/golden-rules.md"
+echo
+echo "2. Open your project in $IDE_NAME"
+echo
+echo "3. Tell your AI:"
+echo "   'Read and follow the rules in $RULES_DIR/$RULES_FILE'"
+echo "   'Pay special attention to the top confirmation workflow'"
+echo
+echo "4. Initialize Git (if new project):"
+if [ "$WORKFLOW_TYPE" = "dev-first" ]; then
+    echo "   git init"
+    echo "   git add ."
+    echo "   git commit -m 'initial commit (v1.0.0)'"
+    echo "   git branch dev"
+    echo "   git checkout dev"
+else
+    echo "   git init"
+    echo "   git add ."
+    echo "   git commit -m 'initial commit (v1.0.0)'"
+fi
+echo
+
+print_info "Read workflow details: .vasgit/docs/git-workflows.md"
+echo
+print_success "Done! Start coding with clean Git history."

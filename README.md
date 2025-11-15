@@ -1,5 +1,3 @@
-# Vasgit
-
 ![Vasgit Logo](.vasgit/VASGIT.png)
 
 **Professional Git workflows and AI IDE rules for solo developers.**
@@ -62,14 +60,22 @@ bash .vasgit/scripts/setup.sh
 
 This prevents broken commits and maintains clean Git history.
 
-### Solo Dev-First Workflow
+### Git Workflows
 
-All templates follow the dev-first workflow:
+The setup script lets you choose your workflow:
 
+**Dev-First (Recommended)**
 - Development on `dev` branch
 - Merge to `main` for releases with `--no-ff`
-- Semantic versioning (v0.X.Y+Z)
-- Clean, professional Git history
+- Clear release points in history
+- Best for projects with planned releases
+
+**Linear**
+- All work directly on `main` branch
+- Simplest possible history
+- Good for small projects or experiments
+
+Both use semantic versioning (v0.X.Y+Z) and the "top" confirmation system.
 
 ## Available Technologies
 
@@ -96,23 +102,19 @@ Fallback template for other tech stacks.
 
 ## Documentation
 
-- **[Golden Rules](.vasgit/golden-rules.md)**: Complete "top" workflow guide
+- **[Golden Rules](.vasgit/docs/golden-rules.md)**: Complete "top" workflow guide
 - **[Git Workflows](.vasgit/docs/git-workflows.md)**: Detailed workflow explanations
 - **[Contributing](.vasgit/CONTRIBUTING.md)**: How to contribute templates
 
-## For New Projects: Cleaning Up
+## After Setup
 
-After running setup in a new project created from template:
+The setup script automatically cleans up unnecessary files and keeps only:
 
-```bash
-# Option 1: Keep golden rules for reference
-rm -rf .vasgit/examples .vasgit/templates .vasgit/scripts .vasgit/docs
+- Your selected rules file (`.cursor/rules`, `.ai-ide/rules`, etc.)
+- `.vasgit/docs/` with golden rules and workflow documentation
+- `.vasgit/CONTRIBUTING.md` and `.vasgit/LICENSE`
 
-# Option 2: Remove everything
-rm -rf .vasgit/
-
-# Your project is now clean with just the rules file in place
-```
+Your project stays clean and ready for development.
 
 ## Installation for Different IDEs
 
