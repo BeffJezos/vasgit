@@ -276,9 +276,31 @@ git log --oneline -3  # Check actual last version
 ```
 
 ### **"TOP" CONFIRMATION (CRITICAL!)**
-**NEVER COMMIT WITHOUT USER SAYING "TOP"!**
-- Wait for "top" = Permission to commit
-- NO automatic commits before "top"
+**WHEN USER SAYS "top" - DO THIS WORKFLOW:**
+
+**FIRST: Check if this is a new vasgit project**
+```bash
+git log --oneline -1 2>/dev/null
+```
+
+**If git exists (GitHub template) → AUTOMATICALLY DELETE AND REINITIALIZE:**
+```bash
+rm -rf .git
+git init
+git add .
+git commit -m "initial commit (v0.1.0+1)"
+git branch dev
+git checkout dev
+```
+Then stop - user can start coding!
+
+**If no git → AUTOMATICALLY INITIALIZE:**
+Same commands as above!
+
+**If git exists AND has multiple commits → NORMAL COMMIT:**
+Check version, commit changes as usual.
+
+**KEY POINT:** User ONLY says "top" - YOU do the rest automatically!
 
 ### **SEMANTIC VERSIONING (CRITICAL!)**
 **React-specific MINOR triggers:**
