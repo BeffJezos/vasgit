@@ -261,14 +261,14 @@ echo
 echo "1. Read the golden rules (5 min):"
 echo "   \$ less .vasgit/docs/golden-rules.md"
 echo
-echo "2. Open your AI in $IDE_NAME and tell it:"
+echo "2. Paste this message into your coding assistant ($IDE_NAME):"
 echo "   'Read and follow the rules in $RULES_DIR/$RULES_FILE."
 echo "   Pay special attention to the top confirmation workflow.'"
 echo
 echo "3. Try the 'top' workflow (if new project):"
 echo "   Just say: 'top'"
 echo
-print_info "Your AI will automatically initialize git and commit!"
+print_info "Your coding assistant will automatically initialize git and commit!"
 if [ "$WORKFLOW_TYPE" = "dev-first" ]; then
     echo "   git init"
     echo "   git add ."
@@ -288,9 +288,9 @@ echo
 # Check if new project that will need force push
 COMMIT_COUNT=$(git log --oneline 2>/dev/null | wc -l | tr -d ' ')
 if [ "$COMMIT_COUNT" = "0" ] || [ "$COMMIT_COUNT" = "1" ]; then
-    print_warning "⚠️  AFTER 'top': First push needs --force-with-lease!"
-    echo "   Your AI creates new git history → diverges from remote"
-    echo "   First push: git push origin main --force-with-lease"
+    print_warning "⚠️  AFTER 'top': First push needs --force!"
+    echo "   Your coding assistant creates new git history → diverges from remote"
+    echo "   First push: git push origin main --force"
     echo "   Later: git push origin main (normal)"
     echo
 fi
@@ -303,7 +303,7 @@ echo
 # GitHub Token Setup (Optional)
 print_header "GitHub Token Setup (Optional)"
 echo
-print_info "Enable AI to automatically push commits after 'top' confirmation."
+print_info "Enable your coding assistant to automatically push commits after 'top' confirmation."
 print_info "Best experience: No manual push commands needed."
 print_warning "Use at your own risk: Token gives push access to your repository."
 echo
@@ -315,8 +315,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     print_header "GitHub Token Setup Guide"
     echo
     print_info "Why Personal Access Token (not SSH)?"
-    echo "  • Tokens work better with AI tools (can be embedded in git URLs)"
-    echo "  • SSH keys are more secure but harder to configure for AI auto-push"
+    echo "  • Tokens work better with coding assistants (can be embedded in git URLs)"
+    echo "  • SSH keys are more secure but harder to configure for auto-push"
     echo "  • Tokens can be easily revoked if compromised"
     echo
     
@@ -329,7 +329,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo
     
     echo "2. Click 'Generate new token (classic)'"
-    echo "   • Name: 'Cursor AI - $(basename "$TARGET_DIR")'"
+    echo "   • Name: 'Vasgit - $(basename "$TARGET_DIR")'"
     echo "   • Expiration: 90 days"
     echo "   • Scope: ✅ repo (full control)"
     echo
@@ -368,10 +368,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         if [ "$COMMIT_COUNT" = "0" ] || [ "$COMMIT_COUNT" = "1" ]; then
             print_warning "⚠️  IMPORTANT: After 'top' command, you'll need FORCE PUSH!"
             echo
-            echo "   Why? Your AI will reinitialize git history (clean start)."
+            echo "   Why? Your coding assistant will reinitialize git history (clean start)."
             echo "   Remote still has old history → histories diverged"
             echo
-            print_info "First push after 'top': git push origin main --force-with-lease"
+            print_info "First push after 'top': git push origin main --force"
             print_info "Later pushes: git push origin main (normal)"
         else
             print_info "Test it with: git push origin main"
@@ -396,7 +396,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         
         echo
         print_header "Token Setup Complete!"
-        print_info "Your AI can now push automatically after 'top' confirmation"
+        print_info "Your coding assistant can now push automatically after 'top' confirmation"
         print_info "Read more: .vasgit/docs/github-token-setup.md"
     fi
     echo

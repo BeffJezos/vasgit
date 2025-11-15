@@ -349,9 +349,9 @@ git branch dev
 git checkout dev
 ```
 
-**⚠️ CRITICAL: First push needs --force-with-lease!**
+**⚠️ CRITICAL: First push needs --force!**
 - Why? Git history was reinitialized (old remote history diverged)
-- Command: `git push origin main --force-with-lease`
+- Command: `git push origin main --force`
 - Later pushes: Normal `git push origin main`
 
 **SCENARIO C: Multiple commits (2+) → EXISTING PROJECT**
