@@ -213,57 +213,22 @@ Clean, focused functions are the foundation of maintainable JavaScript.
 
 These rules are repeated because they are CRITICAL:
 
-### **NEW PROJECT SETUP (CRITICAL!)**
-**🚨 WHEN USER SAYS "top" - YOU MUST DO THIS FIRST! 🚨**
+### **PROJECT TYPE DETECTION (CRITICAL!)**
+**🚨 NEVER DELETE GIT HISTORY FROM EXISTING PROJECTS! 🚨**
 
-**STEP 1: Check if git exists**
+**How to detect:**
 ```bash
-git log --oneline -1 2>/dev/null
+git log --oneline 2>/dev/null | wc -l
 ```
 
-**STEP 2: If git exists → DELETE IT and start fresh!**
-```bash
-rm -rf .git
-```
+**Results:**
+- **0 commits:** New project (no git) → initialize fresh
+- **1 commit:** New project (GitHub template) → delete & reinitialize  
+- **2+ commits:** Existing project → KEEP HISTORY, implant vasgit
 
-**STEP 3: Initialize clean git repo**
-```bash
-git init
-git add .
-git commit -m "initial commit (v0.1.0+1)"
-git branch dev
-git checkout dev
-```
+**NEVER assume! ALWAYS count commits first!**
 
-**WHY?** To remove GitHub's "Initial commit" and create a clean history with proper author and versioning!
-
-**THIS IS NOT OPTIONAL - ALWAYS DO THIS FOR NEW VASGIT PROJECTS!**
-
-### **NEW PROJECT SETUP (CRITICAL!)**
-**🚨 WHEN USER SAYS "top" - YOU MUST DO THIS FIRST! 🚨**
-
-**STEP 1: Check if git exists**
-```bash
-git log --oneline -1 2>/dev/null
-```
-
-**STEP 2: If git exists → DELETE IT and start fresh!**
-```bash
-rm -rf .git
-```
-
-**STEP 3: Initialize clean git repo**
-```bash
-git init
-git add .
-git commit -m "initial commit (v0.1.0+1)"
-git branch dev
-git checkout dev
-```
-
-**WHY?** To remove GitHub's "Initial commit" and create a clean history with proper author and versioning!
-
-**THIS IS NOT OPTIONAL - ALWAYS DO THIS FOR NEW VASGIT PROJECTS!**
+This prevents catastrophic data loss from deleting existing git histories!
 
 ### **VERSION VALIDATION (CRITICAL!)**
 **NEVER "INVENT" VERSIONS - ALWAYS CHECK GIT LOG FIRST!**
@@ -275,14 +240,23 @@ Before EVERY commit:
 4. NEVER guess or assume versions
 
 ### **"TOP" CONFIRMATION (CRITICAL!)**
-**WHEN USER SAYS "top" - DO THIS WORKFLOW:**
+**WHEN USER SAYS "top" - AUTOMATICALLY DETECT PROJECT TYPE:**
 
-**FIRST: Check if this is a new vasgit project**
+**STEP 1: Check git state**
 ```bash
-git log --oneline -1 2>/dev/null
+git log --oneline 2>/dev/null | wc -l
 ```
 
-**If git exists (GitHub template) → AUTOMATICALLY DELETE AND REINITIALIZE:**
+**SCENARIO A: No git repo (count = 0) → NEW PROJECT**
+```bash
+git init
+git add .
+git commit -m "initial commit (v0.1.0+1)"
+git branch dev
+git checkout dev
+```
+
+**SCENARIO B: Only 1 commit (GitHub template) → NEW PROJECT**
 ```bash
 rm -rf .git
 git init
@@ -291,15 +265,17 @@ git commit -m "initial commit (v0.1.0+1)"
 git branch dev
 git checkout dev
 ```
-Then stop - user can start coding!
 
-**If no git → AUTOMATICALLY INITIALIZE:**
-Same commands as above!
+**SCENARIO C: Multiple commits (2+) → EXISTING PROJECT**
+- Message: `chore: implant vasgit into project (vX.Y.Z+N)`
+- Version detection:
+  1. Check last commit for version: `git log --oneline -1 | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+\+[0-9]+'`
+  2. If found → continue from there (e.g., v1.2.3+45 → v1.2.4+46)
+  3. If NOT found → use commit count: `0.1.0+{commit_count}` (e.g., 23 commits → v0.1.0+23)
+- Create `dev` branch if it doesn't exist
+- Switch to `dev` branch
 
-**If git exists AND has multiple commits → NORMAL COMMIT:**
-Check version, commit changes as usual.
-
-**KEY POINT:** User ONLY says "top" - YOU do the rest automatically!
+**KEY POINT:** User ONLY says "top" - YOU detect and handle automatically!
 
 ### **SEMANTIC VERSIONING (CRITICAL!)**
 - README/Documentation updates = MINOR (0.X.0)
