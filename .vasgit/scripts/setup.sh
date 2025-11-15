@@ -12,12 +12,23 @@ print_error() { echo -e "\033[31m✗ $1\033[0m"; }
 print_info() { echo -e "\033[34mℹ $1\033[0m"; }
 print_header() { echo -e "\033[1;36m$1\033[0m"; }
 
-# Get script directory
-SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-
-print_header "Vasgit Setup"
+# ASCII Art
+clear
+echo -e "\033[1;36m"
+cat << "EOF"
+__     ___    ____   ____ ___ _____ 
+\ \   / / \  / ___| / ___|_ _|_   _|
+ \ \ / / _ \ \___ \| |  _ | |  | |  
+  \ V / ___ \ ___) | |_| || |  | |  
+   \_/_/   \_\____/ \____|___| |_|
+EOF
+echo -e "\033[0m"
+echo
 print_info "Professional Git workflows for AI-assisted development"
 echo
+
+# Get script directory
+SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 # Project type
 print_header "Project Type"
@@ -258,4 +269,86 @@ echo
 
 print_info "Read workflow details: .vasgit/docs/git-workflows.md"
 echo
+
+# GitHub Token Setup (Optional)
+print_header "GitHub Token Setup (Optional)"
+print_info "Want to enable AI auto-push? Setup GitHub token now."
+echo
+read -p "Setup GitHub token for automatic push? (y/N): " -n 1 -r
+echo
+echo
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    print_header "GitHub Token Setup Guide"
+    echo
+    print_info "Follow these steps to enable AI auto-push:"
+    echo
+    
+    echo "1. Go to GitHub.com → Settings → Developer settings"
+    echo "   → Personal access tokens → Tokens (classic)"
+    echo
+    read -p "Press Enter when ready to continue..."
+    echo
+    
+    echo "2. Click 'Generate new token (classic)'"
+    echo "   • Name: 'Cursor AI - $(basename "$TARGET_DIR")'"
+    echo "   • Expiration: 90 days"
+    echo "   • Scope: ✅ repo (full control)"
+    echo
+    read -p "Press Enter when you've generated the token..."
+    echo
+    
+    print_warning "IMPORTANT: Copy your token NOW (you won't see it again!)"
+    echo
+    read -p "Paste your GitHub token here: " -s GITHUB_TOKEN
+    echo
+    echo
+    
+    if [ -z "$GITHUB_TOKEN" ]; then
+        print_warning "No token provided. Skipping setup."
+    else
+        # Get GitHub username and repo
+        read -p "Enter your GitHub username: " GITHUB_USER
+        read -p "Enter your repository name: " GITHUB_REPO
+        
+        # Configure git remote with token
+        cd "$TARGET_DIR"
+        
+        if git remote get-url origin &>/dev/null; then
+            print_info "Updating existing remote..."
+            git remote set-url origin "https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${GITHUB_REPO}.git"
+        else
+            print_info "Adding new remote..."
+            git remote add origin "https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${GITHUB_REPO}.git"
+        fi
+        
+        print_success "GitHub token configured!"
+        echo
+        print_info "Test it with: git push origin main"
+        echo
+        
+        # Update AI rules with push permission
+        if [ -f "$FULL_RULES_PATH" ]; then
+            echo "" >> "$FULL_RULES_PATH"
+            echo "## Git Push Permission" >> "$FULL_RULES_PATH"
+            echo "" >> "$FULL_RULES_PATH"
+            echo "I have permission to automatically push commits after 'top' confirmation:" >> "$FULL_RULES_PATH"
+            echo '```bash' >> "$FULL_RULES_PATH"
+            echo "git push origin main" >> "$FULL_RULES_PATH"
+            echo "# or: git push origin dev" >> "$FULL_RULES_PATH"
+            echo '```' >> "$FULL_RULES_PATH"
+            echo "" >> "$FULL_RULES_PATH"
+            echo "Network permission is configured. Use required_permissions: ['git_write', 'network'] in tool calls." >> "$FULL_RULES_PATH"
+            
+            print_success "Updated rules file with push permission"
+        fi
+        
+        echo
+        print_header "Token Setup Complete!"
+        print_info "Your AI can now push automatically after 'top' confirmation"
+        print_info "Read more: .vasgit/docs/github-token-setup.md"
+    fi
+    echo
+fi
+
 print_success "Done! Start coding with clean Git history."
