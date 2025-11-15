@@ -1,8 +1,8 @@
 ![Vasgit Logo](.vasgit/VASGIT.png)
 
-**Professional Git workflows and AI IDE rules for solo developers.**
+**AI-powered Git workflow templates for solo developers.**
 
-A **template repository** with battle-tested development workflow templates for AI-assisted solo development. Not a framework or library - just ready-to-use rules files you copy into your projects. Get clean Git history, professional commit standards, and the "top" confirmation workflow that prevents broken commits.
+A **template repository** with battle-tested development workflow templates for coding assistant-driven solo development. Not a framework or library - just ready-to-use rules files you copy into your projects. Get a clean Git history, professional commit standards, and the "top" confirmation workflow that prevents broken commits.
 
 ## Features
 
@@ -69,11 +69,11 @@ rm -rf /tmp/vasgit
 ### The "Top" Confirmation Workflow
 
 1. **You give tasks** → "Add login screen, fix navigation, update colors"
-2. **AI makes changes** → All changes completed
+2. **Coding assistant makes changes** → All changes completed
 3. **You test** → Check everything works
-4. **You say "top"** → AI commits each logical change separately
+4. **You say "top"** → Coding assistant commits each logical change separately
 
-This prevents broken commits and maintains clean Git history.
+This prevents broken commits and maintains a clean Git history.
 
 ### Git Workflows
 
@@ -119,18 +119,20 @@ Fallback template for other tech stacks.
 
 - **[Golden Rules](.vasgit/docs/golden-rules.md)**: Complete "top" workflow guide
 - **[Git Workflows](.vasgit/docs/git-workflows.md)**: Detailed workflow explanations
-- **[GitHub Token Setup](.vasgit/docs/github-token-setup.md)**: Enable AI auto-push (optional)
+- **[GitHub Token Setup](.vasgit/docs/github-token-setup.md)**: Enable automatic push (optional)
 - **[Contributing](.vasgit/CONTRIBUTING.md)**: How to contribute templates
 
 ## After Setup
 
-The setup script automatically cleans up unnecessary files and keeps only:
+For **new projects**, the setup script automatically cleans up and keeps only:
 
 - Your selected rules file (`.cursor/rules`, `.ai-ide/rules`, etc.)
 - `.vasgit/docs/` with golden rules and workflow documentation
 - `.vasgit/CONTRIBUTING.md` and `.vasgit/LICENSE`
 
-Your project stays clean and ready for development.
+All setup files (setup.bat, scripts, templates, examples) are removed automatically.
+
+For **existing projects**, only the rules file is added to your project. No cleanup needed.
 
 ## Supported IDEs
 
@@ -140,7 +142,7 @@ The setup script handles this automatically, but manual paths:
 - **Windsurf**: `.wind/rules`
 - **VS Code / Visual Studio (Copilot)**: `.github/copilot-instructions.md`
 - **JetBrains (IntelliJ, PyCharm, etc.)**: `.github/copilot-instructions.md`
-- **Universal**: `.ai-ide/rules` (for any other AI IDE)
+- **Universal**: `.ai-ide/rules` (for any other coding assistant IDE)
 
 ## Getting Updates
 
