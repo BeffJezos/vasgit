@@ -284,6 +284,17 @@ echo
 print_info "Note: Normally combine 'top' with next task: 'top - add dark mode'"
 print_info "      This time it's just for showcase!"
 echo
+
+# Check if new project that will need force push
+COMMIT_COUNT=$(git log --oneline 2>/dev/null | wc -l | tr -d ' ')
+if [ "$COMMIT_COUNT" = "0" ] || [ "$COMMIT_COUNT" = "1" ]; then
+    print_warning "⚠️  AFTER 'top': First push needs --force-with-lease!"
+    echo "   Your AI creates new git history → diverges from remote"
+    echo "   First push: git push origin main --force-with-lease"
+    echo "   Later: git push origin main (normal)"
+    echo
+fi
+
 print_success "That's it! Start coding with clean Git history."
 echo
 print_info "Read workflow details: .vasgit/docs/git-workflows.md"
@@ -351,7 +362,20 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         
         print_success "GitHub token configured!"
         echo
-        print_info "Test it with: git push origin main"
+        
+        # Check if this is a new project (will need force push after top)
+        COMMIT_COUNT=$(git log --oneline 2>/dev/null | wc -l | tr -d ' ')
+        if [ "$COMMIT_COUNT" = "0" ] || [ "$COMMIT_COUNT" = "1" ]; then
+            print_warning "⚠️  IMPORTANT: After 'top' command, you'll need FORCE PUSH!"
+            echo
+            echo "   Why? Your AI will reinitialize git history (clean start)."
+            echo "   Remote still has old history → histories diverged"
+            echo
+            print_info "First push after 'top': git push origin main --force-with-lease"
+            print_info "Later pushes: git push origin main (normal)"
+        else
+            print_info "Test it with: git push origin main"
+        fi
         echo
         
         # Update AI rules with push permission

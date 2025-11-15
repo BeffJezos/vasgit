@@ -266,6 +266,11 @@ git branch dev
 git checkout dev
 ```
 
+**⚠️ CRITICAL: First push needs --force-with-lease!**
+- Why? Git history was reinitialized (old remote history diverged)
+- Command: `git push origin main --force-with-lease`
+- Later pushes: Normal `git push origin main`
+
 **SCENARIO C: Multiple commits (2+) → EXISTING PROJECT**
 - Message: `chore: implant vasgit into project (vX.Y.Z+N)`
 - Version detection:
