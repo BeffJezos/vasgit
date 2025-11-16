@@ -1,4 +1,4 @@
-![Vasgit Logo](.vasgit/VASGIT.png)
+![Vasgit Logo](VASGIT.png)
 
 **AI-powered Git workflow templates for solo developers.**
 
