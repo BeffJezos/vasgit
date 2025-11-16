@@ -12,6 +12,32 @@ You work professionally and uncompromisingly. These rules apply universally – 
 
 ⸻
 
+## 🚨 ULTRA-CRITICAL: NEVER COMMIT WITHOUT "TOP" CONFIRMATION! 🚨
+
+**ABSOLUTE RULE #1: DO NOT COMMIT ANYTHING WITHOUT USER SAYING "TOP"!**
+
+### **THE ONLY WAY TO COMMIT:**
+1. User gives tasks → You make ALL changes
+2. User tests → Checks if everything works
+3. **User says "top"** → ONLY THEN you commit!
+
+### **FORBIDDEN:**
+- ❌ Auto-committing after changes
+- ❌ Committing because "work is done"
+- ❌ Committing without explicit "top" confirmation
+- ❌ Asking "should I commit?" (just wait for "top")
+
+### **ALLOWED:**
+- ✅ ONLY commit when user explicitly says "top"
+- ✅ Wait patiently after completing changes
+- ✅ User says "top" = green light to commit
+
+**IF YOU COMMIT WITHOUT "TOP" = YOU VIOLATED THE MOST CRITICAL RULE!**
+
+This prevents broken commits and gives user control over when commits happen.
+
+⸻
+
 ## Git Workflow - ULTRA-STRICT RULES
 - Work on dev branch – Every change begins on dev, then merge to main.
 - FORBIDDEN OPERATIONS:
@@ -250,13 +276,22 @@ User says: "Button smaller, center text, change color"
 
 ⸻
 
-## Critical Errors – No Go
+## 🔴 Critical Errors – ABSOLUTELY NO GO!
+
+### **🚨 RULE #1 (MOST CRITICAL): NEVER COMMIT WITHOUT "TOP"!**
+- ❌ **FORBIDDEN:** Committing without user saying "top"
+- ❌ **FORBIDDEN:** Auto-committing after completing changes  
+- ❌ **FORBIDDEN:** Asking "should I commit?" instead of waiting for "top"
+- ✅ **ONLY ALLOWED:** Commit when user explicitly says "top"
+
+**Violating this rule = Breaking the entire workflow!**
+
+### **OTHER CRITICAL ERRORS:**
 - Direct commits to main (only merges allowed).
 - Commits without tests / without lint.
 - Uppercase or unclear commits.
 - Unsafe error handling.
 - Build doesn't run and you push anyway.
-- **NEW:** Committing without "top" confirmation from user!
 - **CRITICAL:** NEVER mix multiple logical changes in one commit!
 - **CRITICAL:** Leaving syntax errors or build errors open!
 - **MANDATORY:** After every file change IMMEDIATELY check read_lints and fix!
@@ -283,9 +318,13 @@ User says: "Button smaller, center text, change color"
 When you think: "Is that enough?" → No. Do it right. Always.
 You're not just anyone. You're the right hand of Deus Ex Machina. And your code reflects that.
 
-**NEW CRITICAL RULE:**
+**🚨 ULTRA-CRITICAL RULE - READ THIS 10 TIMES: 🚨**
+**NEVER, EVER, UNDER ANY CIRCUMSTANCES COMMIT WITHOUT USER SAYING "TOP"!**
+
 After EVERY logical change check rules, but ONLY commit after "top" confirmation!
 One logical change = One commit! No commits without user confirmation!
+
+**REPEAT: DO NOT COMMIT WITHOUT "TOP" - NO EXCEPTIONS!**
 
 **CHAT START RULE:**
 AT EVERY NEW CHAT IMMEDIATELY (first message):

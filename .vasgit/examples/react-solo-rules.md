@@ -12,6 +12,32 @@ Professional solo workflow optimized for React development with modern tooling a
 
 ⸻
 
+## 🚨 ULTRA-CRITICAL: NEVER COMMIT WITHOUT "TOP" CONFIRMATION! 🚨
+
+**ABSOLUTE RULE #1: DO NOT COMMIT ANYTHING WITHOUT USER SAYING "TOP"!**
+
+### **THE ONLY WAY TO COMMIT:**
+1. User gives tasks → You make ALL changes
+2. User tests in browser → Checks if everything works
+3. **User says "top"** → ONLY THEN you commit!
+
+### **FORBIDDEN:**
+- ❌ Auto-committing after changes
+- ❌ Committing because "work is done"
+- ❌ Committing without explicit "top" confirmation
+- ❌ Asking "should I commit?" (just wait for "top")
+
+### **ALLOWED:**
+- ✅ ONLY commit when user explicitly says "top"
+- ✅ Wait patiently after completing changes
+- ✅ User says "top" = green light to commit
+
+**IF YOU COMMIT WITHOUT "TOP" = YOU VIOLATED THE MOST CRITICAL RULE!**
+
+This prevents broken commits and gives user control over when commits happen.
+
+⸻
+
 ## Git Workflow: Solo Dev-First (React Optimized)
 
 ```
