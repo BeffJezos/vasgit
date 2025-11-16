@@ -241,13 +241,13 @@ if [ "$PROJECT_TYPE" = "new" ] && [ -d "$TARGET_DIR/.vasgit" ]; then
     cd "$TARGET_DIR/.vasgit"
     rm -rf examples templates scripts VASGIT.png
     
-    # Remove setup files from root
+    # Remove setup files and template files from root
     cd "$TARGET_DIR"
-    rm -f setup.bat
+    rm -f setup.bat README.md VASGIT.png
     
     print_success "Cleaned up .vasgit/ directory"
     print_info "Kept: docs/, CONTRIBUTING.md, LICENSE"
-    print_success "Removed setup files (no longer needed)"
+    print_success "Removed setup files and template files (no longer needed)"
     echo
 fi
 
@@ -383,10 +383,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         fi
         echo
         
-        # Update AI rules with push permission
+        # Update AI rules with push permission and remote info
         if [ -f "$FULL_RULES_PATH" ]; then
             echo "" >> "$FULL_RULES_PATH"
-            echo "## Git Push Permission" >> "$FULL_RULES_PATH"
+            echo "## Git Push Permission & Remote Configuration" >> "$FULL_RULES_PATH"
             echo "" >> "$FULL_RULES_PATH"
             echo "I have permission to automatically push commits after 'top' confirmation:" >> "$FULL_RULES_PATH"
             echo '```bash' >> "$FULL_RULES_PATH"
@@ -395,8 +395,23 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
             echo '```' >> "$FULL_RULES_PATH"
             echo "" >> "$FULL_RULES_PATH"
             echo "Network permission is configured. Use required_permissions: ['git_write', 'network'] in tool calls." >> "$FULL_RULES_PATH"
+            echo "" >> "$FULL_RULES_PATH"
+            echo "### CRITICAL: Remote Restoration After 'top'" >> "$FULL_RULES_PATH"
+            echo "" >> "$FULL_RULES_PATH"
+            echo "**Repository Information:**" >> "$FULL_RULES_PATH"
+            echo "- GitHub User: \`${GITHUB_USER}\`" >> "$FULL_RULES_PATH"
+            echo "- Repository: \`${GITHUB_REPO}\`" >> "$FULL_RULES_PATH"
+            echo "- Token: Configured (embedded in remote URL)" >> "$FULL_RULES_PATH"
+            echo "" >> "$FULL_RULES_PATH"
+            echo "**IMPORTANT:** When user says 'top' for NEW PROJECT SETUP (git reinitialization):" >> "$FULL_RULES_PATH"
+            echo "1. After \`git init\` and initial commit" >> "$FULL_RULES_PATH"
+            echo "2. IMMEDIATELY restore remote: \`git remote add origin https://<TOKEN>@github.com/${GITHUB_USER}/${GITHUB_REPO}.git\`" >> "$FULL_RULES_PATH"
+            echo "3. The token is already configured from setup - reuse it" >> "$FULL_RULES_PATH"
+            echo "4. Then proceed with force push: \`git push origin main --force\`" >> "$FULL_RULES_PATH"
+            echo "" >> "$FULL_RULES_PATH"
+            echo "This prevents the 'remote lost' issue after git reinitialization." >> "$FULL_RULES_PATH"
             
-            print_success "Updated rules file with push permission"
+            print_success "Updated rules file with push permission and remote info"
         fi
         
         echo
@@ -408,6 +423,23 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 print_success "Done! Start coding with clean Git history."
+
+# Remote setup warning for new projects without token
+if [ "$PROJECT_TYPE" = "new" ]; then
+    COMMIT_COUNT=$(git log --oneline 2>/dev/null | wc -l | tr -d ' ')
+    if [ "$COMMIT_COUNT" = "0" ] || [ "$COMMIT_COUNT" = "1" ]; then
+        # Check if token was NOT configured (rules file doesn't contain remote info)
+        if [ -f "$FULL_RULES_PATH" ] && ! grep -q "Remote Restoration After 'top'" "$FULL_RULES_PATH"; then
+            echo
+            print_warning "⚠️  IMPORTANT: Remote Setup After 'top'"
+            echo "   After running 'top' (git reinitialization), you'll need to add your remote:"
+            echo "   git remote add origin <your-repo-url>"
+            echo "   git push origin main --force"
+            echo
+            print_info "Tip: Use GitHub token setup (see above) for automatic remote configuration!"
+        fi
+    fi
+fi
 
 # Update hint
 if [ "$PROJECT_TYPE" = "existing" ]; then

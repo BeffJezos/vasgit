@@ -245,12 +245,14 @@ if ($PROJECT_TYPE -eq "new" -and (Test-Path (Join-Path $TARGET_DIR ".vasgit"))) 
     Remove-Item (Join-Path $vasgit_dir "scripts") -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item (Join-Path $vasgit_dir "VASGIT.png") -Force -ErrorAction SilentlyContinue
     
-    # Remove setup files from root
+    # Remove setup files and template files from root
     Remove-Item (Join-Path $TARGET_DIR "setup.bat") -Force -ErrorAction SilentlyContinue
+    Remove-Item (Join-Path $TARGET_DIR "README.md") -Force -ErrorAction SilentlyContinue
+    Remove-Item (Join-Path $TARGET_DIR "VASGIT.png") -Force -ErrorAction SilentlyContinue
     
     Write-Success "Cleaned up .vasgit\ directory"
     Write-Info "Kept: docs\, CONTRIBUTING.md, LICENSE"
-    Write-Success "Removed setup files (no longer needed)"
+    Write-Success "Removed setup files and template files (no longer needed)"
     Write-Host ""
 }
 
@@ -405,10 +407,10 @@ if ($reply -match "^[Yy]$") {
         }
         Write-Host ""
         
-        # Update AI rules with push permission
+        # Update AI rules with push permission and remote info
         if (Test-Path $FULL_RULES_PATH) {
             Add-Content -Path $FULL_RULES_PATH -Value ""
-            Add-Content -Path $FULL_RULES_PATH -Value "## Git Push Permission"
+            Add-Content -Path $FULL_RULES_PATH -Value "## Git Push Permission & Remote Configuration"
             Add-Content -Path $FULL_RULES_PATH -Value ""
             Add-Content -Path $FULL_RULES_PATH -Value "I have permission to automatically push commits after 'top' confirmation:"
             Add-Content -Path $FULL_RULES_PATH -Value '```bash'
@@ -417,8 +419,23 @@ if ($reply -match "^[Yy]$") {
             Add-Content -Path $FULL_RULES_PATH -Value '```'
             Add-Content -Path $FULL_RULES_PATH -Value ""
             Add-Content -Path $FULL_RULES_PATH -Value "Network permission is configured. Use required_permissions: ['git_write', 'network'] in tool calls."
+            Add-Content -Path $FULL_RULES_PATH -Value ""
+            Add-Content -Path $FULL_RULES_PATH -Value "### CRITICAL: Remote Restoration After 'top'"
+            Add-Content -Path $FULL_RULES_PATH -Value ""
+            Add-Content -Path $FULL_RULES_PATH -Value "**Repository Information:**"
+            Add-Content -Path $FULL_RULES_PATH -Value "- GitHub User: ``${GITHUB_USER}``"
+            Add-Content -Path $FULL_RULES_PATH -Value "- Repository: ``${GITHUB_REPO}``"
+            Add-Content -Path $FULL_RULES_PATH -Value "- Token: Configured (embedded in remote URL)"
+            Add-Content -Path $FULL_RULES_PATH -Value ""
+            Add-Content -Path $FULL_RULES_PATH -Value "**IMPORTANT:** When user says 'top' for NEW PROJECT SETUP (git reinitialization):"
+            Add-Content -Path $FULL_RULES_PATH -Value "1. After ``git init`` and initial commit"
+            Add-Content -Path $FULL_RULES_PATH -Value "2. IMMEDIATELY restore remote: ``git remote add origin https://<TOKEN>@github.com/${GITHUB_USER}/${GITHUB_REPO}.git``"
+            Add-Content -Path $FULL_RULES_PATH -Value "3. The token is already configured from setup - reuse it"
+            Add-Content -Path $FULL_RULES_PATH -Value "4. Then proceed with force push: ``git push origin main --force``"
+            Add-Content -Path $FULL_RULES_PATH -Value ""
+            Add-Content -Path $FULL_RULES_PATH -Value "This prevents the 'remote lost' issue after git reinitialization."
             
-            Write-Success "Updated rules file with push permission"
+            Write-Success "Updated rules file with push permission and remote info"
         }
         
         Write-Host ""
@@ -430,6 +447,31 @@ if ($reply -match "^[Yy]$") {
 }
 
 Write-Success "Done! Start coding with clean Git history."
+
+# Remote setup warning for new projects without token
+if ($PROJECT_TYPE -eq "new") {
+    Push-Location $TARGET_DIR
+    $COMMIT_COUNT = 0
+    try {
+        $COMMIT_COUNT = (git log --oneline 2>$null | Measure-Object).Count
+    } catch {
+        $COMMIT_COUNT = 0
+    }
+    Pop-Location
+    
+    if ($COMMIT_COUNT -eq 0 -or $COMMIT_COUNT -eq 1) {
+        # Check if token was NOT configured (rules file doesn't contain remote info)
+        if ((Test-Path $FULL_RULES_PATH) -and -not (Select-String -Path $FULL_RULES_PATH -Pattern "Remote Restoration After 'top'" -Quiet)) {
+            Write-Host ""
+            Write-Warning "⚠️  IMPORTANT: Remote Setup After 'top'"
+            Write-Host "   After running 'top' (git reinitialization), you'll need to add your remote:"
+            Write-Host "   git remote add origin <your-repo-url>"
+            Write-Host "   git push origin main --force"
+            Write-Host ""
+            Write-Info "Tip: Use GitHub token setup (see above) for automatic remote configuration!"
+        }
+    }
+}
 
 # Update hint
 if ($PROJECT_TYPE -eq "existing") {
