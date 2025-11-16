@@ -91,6 +91,36 @@ git checkout dev
 
 ⸻
 
+## 🚨 CRITICAL: MINOR RELEASE MERGE TO MAIN
+
+**RULE:** Every commit with version 0.X.0 (where X changes) = IMMEDIATE merge to main!
+
+**WORKFLOW FOR MINOR RELEASES (0.X.0):**
+1. ✅ Commit on dev: `git commit -m "feat: add offline mode (v0.9.0)"`
+2. ⚠️ **STOP! This is a MINOR release (0.9.0)!**
+3. 🔄 **IMMEDIATELY merge to main:**
+   ```bash
+   git checkout main
+   git merge --no-ff dev
+   git tag v0.9.0
+   git push origin main --tags
+   git checkout dev
+   ```
+4. ✅ Continue work on dev
+
+**WHEN TO MERGE TO MAIN:**
+- ✅ **YES:** v0.6.0, v0.7.0, v0.8.0, v1.0.0 (X changes in 0.X.0)
+- ❌ **NO:** v0.6.1, v0.6.2, v0.6.33 (only Y changes in 0.X.Y)
+
+**EXAMPLES OF MINOR FEATURES:**
+- New screens/widgets (✓ = 0.X.0)
+- Authentication system (✓ = 0.X.0)
+- README/Documentation updates (✓ = 0.X.0)
+- State management changes (✓ = 0.X.0)
+- Bug fixes, UI tweaks (✗ = 0.X.Y - PATCH only)
+
+⸻
+
 ## Universal Coding Principles (Flutter-Optimized)
 - Use const constructors wherever possible for performance
 - **Flutter-specific:** StatelessWidget over StatefulWidget when possible

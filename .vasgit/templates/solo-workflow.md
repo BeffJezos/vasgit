@@ -80,17 +80,36 @@ User says: "Button smaller, center text, change color"
 - **Content Revisions** (README, Marketing, App descriptions) ✓
 - **Fundamental Text Changes** (not just small corrections) ✓
 
-### **Minor Release Workflow (0.X.0):**
-- `git checkout main` → `git merge --no-ff dev` → `git tag v0.X.0` → `git push origin main --tags` → `git checkout dev`
-
 ### **Logical Changes (each = one separate commit):**
 - 3 cosmetic UI fixes = 3 commits "fix: reduce button size (v0.8.28+67)", "fix: center text (v0.8.29+68)", "fix: update colors (v0.8.30+69)"
 - 1 Bug fix = 1 commit "fix: sidebar animation issue (v0.8.31+70)"  
 - 1 new feature = 1 commit "feat: add dark mode toggle (v0.9.0+71)" ← MINOR!
 - Auth System = 1 commit "feat: complete auth system (v0.9.0+80)" ← MINOR!
 
-### **CRITICAL:** 
+### **🚨 CRITICAL: AFTER COMMITTING MINOR RELEASE (0.X.0) - MERGE TO MAIN!**
+
+**RULE:** Every commit with version 0.X.0 (where X changes) = IMMEDIATE merge to main!
+
+**WORKFLOW FOR MINOR RELEASES (0.X.0):**
+1. ✅ Commit on dev: `git commit -m "feat: add dark mode (v0.9.0)"`
+2. ⚠️ **STOP! This is a MINOR release (0.9.0)!**
+3. 🔄 **IMMEDIATELY merge to main:**
+   ```bash
+   git checkout main
+   git merge --no-ff dev
+   git tag v0.9.0
+   git push origin main --tags
+   git checkout dev
+   ```
+4. ✅ Continue work on dev
+
+**WHEN TO MERGE TO MAIN:**
+- ✅ **YES:** v0.6.0, v0.7.0, v0.8.0, v1.0.0 (X changes in 0.X.0)
+- ❌ **NO:** v0.6.1, v0.6.2, v0.6.33 (only Y changes in 0.X.Y)
+
+**CRITICAL:** 
 - For MINOR features ALWAYS use 0.X.0 instead of 0.Y.Z!
+- AFTER committing 0.X.0 → IMMEDIATELY check out main and merge!
 
 **NEVER:** commit without "top" confirmation or mix multiple logical changes in one commit  
 **ALWAYS:** Multiple logical changes → "top" confirmation → SEPARATE commits for each logical change = immediately
@@ -354,6 +373,26 @@ git checkout dev
 - Switch to `dev` branch
 
 **KEY POINT:** User ONLY says "top" - YOU detect and handle automatically!
+
+### **MINOR RELEASE MERGE (CRITICAL!)**
+**EVERY 0.X.0 COMMIT = IMMEDIATE MERGE TO MAIN!**
+
+After committing ANY version with 0.X.0 format:
+1. Stop immediately
+2. `git checkout main`
+3. `git merge --no-ff dev`
+4. `git tag v0.X.0`
+5. `git push origin main --tags`
+6. `git checkout dev`
+
+Examples that require merge:
+- v0.7.0 ✓ (X changed from 6 to 7)
+- v0.8.0 ✓ (X changed from 7 to 8)
+- v1.0.0 ✓ (MAJOR release)
+
+Examples that DON'T require merge:
+- v0.7.1 ✗ (only Y changed)
+- v0.7.2 ✗ (only Y changed)
 
 ### **SEMANTIC VERSIONING (CRITICAL!)**
 **CONTENT REVISIONS = MINOR, NOT PATCH!**
