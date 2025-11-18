@@ -10,7 +10,7 @@ alwaysApply: true
 
 **Essential guide for successful AI assistant collaboration with the "top" confirmation workflow.**
 
-⸻
+
 
 ## **CRITICAL: START EVERY NEW CHAT WITH THIS!**
 
@@ -30,7 +30,7 @@ The AI should respond with something like:
 I will wait for your 'top' confirmation before committing any changes."
 ```
 
-⸻
+
 
 ## **The "TOP" Workflow - How It Works**
 
@@ -56,7 +56,7 @@ AI: [Commits second logical change: text color]
 AI: "Both logical changes committed separately!"
 ```
 
-⸻
+
 
 ## **Common Mistakes to Avoid**
 
@@ -71,7 +71,7 @@ AI: "Both logical changes committed separately!"
 - Always test changes first
 - Keep logical groups manageable (max 3 changes for a commit)
 
-⸻
+
 
 ## **Best Practices for Maximum Success**
 
@@ -101,7 +101,7 @@ AI: "Understood, fixing the issue first."
 You: [Tests again] "Now it works. top"
 ```
 
-⸻
+
 
 ## **Troubleshooting**
 
@@ -127,7 +127,7 @@ This should never happen, but the longer your chat becomes, the more likely it i
 [AI commits current logical groups, then continues with API work]
 ```
 
-⸻
+
 
 ## Quick Reference Checklist
 
@@ -147,7 +147,7 @@ This should never happen, but the longer your chat becomes, the more likely it i
 - [ ] No broken functionality
 - [ ] Ready for this logical group to be committed
 
-⸻
+
 
 ## **Success Indicators**
 

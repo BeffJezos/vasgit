@@ -10,9 +10,34 @@ alwaysApply: true
 
 Professional solo workflow optimized for Go development in backend services, CLI tools, and microservices.
 
+
+
+## AFTER SETUP - FIRST CHAT BEHAVIOR
+
+**IMPORTANT: When user starts a new chat after running setup, YOU must proactively guide them!**
+
+### ON FIRST MESSAGE:
+1. Say: "RULE VALIDATION: I now automatically follow all rules!"
+
+2. Execute `git log --oneline 2>/dev/null | wc -l` to count commits
+
+3. **If NEW PROJECT (0 or 1 commit):**
+   - **Tell user:** "This looks like a new project! You can say 'top' and I'll initialize git properly with clean history."
+   - **Explain:** "The 'top' command triggers git initialization and first commit."
+   - **WAIT for user to say "top"** before doing anything!
+
+4. **If EXISTING PROJECT (2+ commits):**
+   - **Count commits** and remember this number for versioning
+   - **Check if versions exist:** `git log --oneline -1 | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+\+[0-9]+'`
+   - **If version found:** Continue from that version (e.g., v1.2.3+45 → v1.2.4+46)
+   - **If NO version found:** Use commit count: `v0.1.0+{commit_count}` (e.g., 23 commits → v0.1.0+23)
+   - **Tell user:** "Ready to work! Say 'top' after testing your changes to commit."
+
+**This ensures correct version numbering from the start!**
+
 ⸻
 
-## 🚨 ULTRA-CRITICAL: NEVER COMMIT WITHOUT "TOP" CONFIRMATION! 🚨
+##  ULTRA-CRITICAL: NEVER COMMIT WITHOUT "TOP" CONFIRMATION! 
 
 **ABSOLUTE RULE #1: DO NOT COMMIT ANYTHING WITHOUT USER SAYING "TOP"!**
 
@@ -22,21 +47,21 @@ Professional solo workflow optimized for Go development in backend services, CLI
 3. **User says "top"** → ONLY THEN you commit!
 
 ### **FORBIDDEN:**
-- ❌ Auto-committing after changes
-- ❌ Committing because "work is done"
-- ❌ Committing without explicit "top" confirmation
-- ❌ Asking "should I commit?" (just wait for "top")
+-  Auto-committing after changes
+-  Committing because "work is done"
+-  Committing without explicit "top" confirmation
+-  Asking "should I commit?" (just wait for "top")
 
 ### **ALLOWED:**
-- ✅ ONLY commit when user explicitly says "top"
-- ✅ Wait patiently after completing changes
-- ✅ User says "top" = green light to commit
+-  ONLY commit when user explicitly says "top"
+-  Wait patiently after completing changes
+-  User says "top" = green light to commit
 
 **IF YOU COMMIT WITHOUT "TOP" = YOU VIOLATED THE MOST CRITICAL RULE!**
 
 This prevents broken commits and gives user control over when commits happen.
 
-⸻
+
 
 ## Git Workflow: Solo Dev-First (Go Optimized)
 
@@ -70,7 +95,7 @@ git push origin main --tags
 git checkout dev
 ```
 
-⸻
+
 
 ## Forbidden Operations
 
@@ -98,7 +123,7 @@ git checkout dev
 - [ ] **No Duplicates**: Use same patch version only once
 - [ ] **No Jumps**: Build numbers must be sequential
 
-⸻
+
 
 ## SOLO "TOP" CONFIRMATION WORKFLOW:
 **BASIC PRINCIPLE: User says "top" → AI commits all logical changes separately**
@@ -115,16 +140,16 @@ git checkout dev
 - **Save tokens**: Don't send "top" alone
 - **Keep momentum**: "top - now let's optimize the database queries"
 
-⸻
 
-## 🚨 CRITICAL: MINOR RELEASE MERGE TO MAIN
+
+##  CRITICAL: MINOR RELEASE MERGE TO MAIN
 
 **RULE:** Every commit with version 0.X.0 (where X changes) = IMMEDIATE merge to main!
 
 **WORKFLOW FOR MINOR RELEASES (0.X.0):**
-1. ✅ Commit on dev: `git commit -m "feat: add caching layer (v0.9.0)"`
-2. ⚠️ **STOP! This is a MINOR release (0.9.0)!**
-3. 🔄 **IMMEDIATELY merge to main:**
+1.  Commit on dev: `git commit -m "feat: add caching layer (v0.9.0)"`
+2.  **STOP! This is a MINOR release (0.9.0)!**
+3.  **IMMEDIATELY merge to main:**
    ```bash
    git checkout main
    git merge --no-ff dev
@@ -132,20 +157,20 @@ git checkout dev
    git push origin main --tags
    git checkout dev
    ```
-4. ✅ Continue work on dev
+4.  Continue work on dev
 
 **WHEN TO MERGE TO MAIN:**
-- ✅ **YES:** v0.6.0, v0.7.0, v0.8.0, v1.0.0 (X changes in 0.X.0)
-- ❌ **NO:** v0.6.1, v0.6.2, v0.6.33 (only Y changes in 0.X.Y)
+-  **YES:** v0.6.0, v0.7.0, v0.8.0, v1.0.0 (X changes in 0.X.0)
+-  **NO:** v0.6.1, v0.6.2, v0.6.33 (only Y changes in 0.X.Y)
 
 **EXAMPLES OF MINOR FEATURES:**
-- New API endpoints (✓ = 0.X.0)
-- Authentication system (✓ = 0.X.0)
-- README/Documentation updates (✓ = 0.X.0)
-- Database schema changes (✓ = 0.X.0)
-- Bug fixes, refactoring (✗ = 0.X.Y - PATCH only)
+- New API endpoints ( = 0.X.0)
+- Authentication system ( = 0.X.0)
+- README/Documentation updates ( = 0.X.0)
+- Database schema changes ( = 0.X.0)
+- Bug fixes, refactoring ( = 0.X.Y - PATCH only)
 
-⸻
+
 
 ## Universal Coding Principles (Go-Optimized)
 - **Go-specific:** Accept interfaces, return structs
@@ -157,7 +182,7 @@ git checkout dev
 - **Follow Go documentation** and Effective Go at all times
 - **Document exported functions** with godoc comments
 
-⸻
+
 
 ## Commit Standards
 
@@ -180,7 +205,7 @@ type: description (v0.X.Y+Z)
 - `fix: resolve goroutine leak in worker pool (v0.7.15+46)`
 - `perf: optimize database connection pooling (v0.7.16+47)`
 
-⸻
+
 
 ## Semantic Versioning: Go
 
@@ -207,7 +232,7 @@ type: description (v0.X.Y+Z)
 - **Fundamental text changes** = MINOR (0.X.0) - NOT PATCH!
 - **Only small corrections** = PATCH (0.X.Y)
 
-⸻
+
 
 ## Go Quality Standards
 
@@ -242,29 +267,29 @@ linters-settings:
     check-blank: true
 ```
 
-⸻
+
 
 ## Go Architecture
 
 ### Project Structure (Standard Go Layout)
 ```
 .
-├── cmd/               # Main applications
-│   └── myapp/
-│       └── main.go
-├── internal/          # Private application code
-│   ├── api/          # API handlers
-│   ├── models/       # Data models
-│   ├── services/     # Business logic
-│   └── repository/   # Data access
-├── pkg/              # Public libraries
-├── configs/          # Configuration files
-├── scripts/          # Build and setup scripts
-├── tests/            # Additional test files
-├── go.mod
-├── go.sum
-├── Makefile
-└── README.md
+ cmd/               # Main applications
+    myapp/
+        main.go
+ internal/          # Private application code
+    api/          # API handlers
+    models/       # Data models
+    services/     # Business logic
+    repository/   # Data access
+ pkg/              # Public libraries
+ configs/          # Configuration files
+ scripts/          # Build and setup scripts
+ tests/            # Additional test files
+ go.mod
+ go.sum
+ Makefile
+ README.md
 ```
 
 ### Code Standards
@@ -291,7 +316,7 @@ if err := validate(user); err != nil {
 result, _ := doSomething()  // NEVER DO THIS
 ```
 
-⸻
+
 
 ## Go Concurrency Best Practices
 
@@ -319,7 +344,7 @@ func worker(ctx context.Context, jobs <-chan Job) error {
 }
 ```
 
-⸻
+
 
 ## Healthy Go Project
 
@@ -338,7 +363,7 @@ func worker(ctx context.Context, jobs <-chan Job) error {
 • Good documentation coverage
 • Consistent code style (gofmt)
 
-⸻
+
 
 ## Go Testing
 
@@ -374,7 +399,7 @@ func TestValidateUser(t *testing.T) {
 }
 ```
 
-⸻
+
 
 **Go Solo Rule:**
 If you think "Should I ignore this error?" → No, handle it explicitly.
@@ -387,14 +412,14 @@ Explicit error handling is the foundation of reliable Go code.
 4. Always work on dev branch, wait for "top" confirmation before committing!
 
 
-⸻
 
-## 🔴 CRITICAL REMINDERS (READ TWICE!)
+
+##  CRITICAL REMINDERS (READ TWICE!)
 
 These rules are repeated because they are CRITICAL:
 
 ### **PROJECT TYPE DETECTION (CRITICAL!)**
-**🚨 NEVER DELETE GIT HISTORY FROM EXISTING PROJECTS! 🚨**
+** NEVER DELETE GIT HISTORY FROM EXISTING PROJECTS! **
 
 **How to detect:**
 ```bash
@@ -446,7 +471,7 @@ git branch dev
 git checkout dev
 ```
 
-**⚠️ CRITICAL: First push needs --force!**
+** CRITICAL: First push needs --force!**
 - Why? Git history was reinitialized (old remote history diverged)
 - Command: `git push origin main --force`
 - Later pushes: Normal `git push origin main`
@@ -473,9 +498,9 @@ NEVER MIX MULTIPLE LOGICAL CHANGES IN ONE COMMIT!
 ### **VERSION SEQUENCE (CRITICAL!)**
 NO DUPLICATE PATCH VERSIONS! NO SKIPPED BUILD NUMBERS!
 
-Correct: v0.8.0+45 → v0.8.0+46 → v0.8.1+47 ✓
-Wrong: v0.8.0+45 → v0.8.0+47 ✗ (skipped +46)
+Correct: v0.8.0+45 → v0.8.0+46 → v0.8.1+47 
+Wrong: v0.8.0+45 → v0.8.0+47  (skipped +46)
 
-⸻
+
 
 **These rules are non-negotiable. Follow them EXACTLY. Every time.**

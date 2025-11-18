@@ -18,7 +18,7 @@ This guide shows you how to set up GitHub tokens so your AI can automatically pu
 3. Give it a name: "Cursor AI - MyProject"
 4. Set expiration: 90 days (or custom)
 5. Select scopes:
-   - ✅ `repo` (full control of private repositories)
+   -  `repo` (full control of private repositories)
 6. Click "Generate token"
 7. **Copy the token immediately** (you won't see it again!)
 
@@ -76,11 +76,11 @@ after committing. Use: git push origin <branch> --force-with-lease when needed."
 ## Security Best Practices
 
 ### Token Security
-- ✅ Use tokens with minimal required scopes
-- ✅ Set expiration dates (90 days recommended)
-- ✅ Never commit tokens to repositories
-- ✅ Rotate tokens regularly
-- ❌ Don't share tokens publicly
+-  Use tokens with minimal required scopes
+-  Set expiration dates (90 days recommended)
+-  Never commit tokens to repositories
+-  Rotate tokens regularly
+-  Don't share tokens publicly
 
 ### For Multiple Projects
 

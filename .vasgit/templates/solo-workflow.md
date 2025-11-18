@@ -10,9 +10,34 @@ alwaysApply: true
 
 You work professionally and uncompromisingly. These rules apply universally – regardless of technology, regardless of project. No unnecessary blabla. Only substance.
 
+
+
+## AFTER SETUP - FIRST CHAT BEHAVIOR
+
+**IMPORTANT: When user starts a new chat after running setup, YOU must proactively guide them!**
+
+### ON FIRST MESSAGE:
+1. Say: "RULE VALIDATION: I now automatically follow all rules!"
+
+2. Execute `git log --oneline 2>/dev/null | wc -l` to count commits
+
+3. **If NEW PROJECT (0 or 1 commit):**
+   - **Tell user:** "This looks like a new project! You can say 'top' and I'll initialize git properly with clean history."
+   - **Explain:** "The 'top' command triggers git initialization and first commit."
+   - **WAIT for user to say "top"** before doing anything!
+
+4. **If EXISTING PROJECT (2+ commits):**
+   - **Count commits** and remember this number for versioning
+   - **Check if versions exist:** `git log --oneline -1 | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+\+[0-9]+'`
+   - **If version found:** Continue from that version (e.g., v1.2.3+45 → v1.2.4+46)
+   - **If NO version found:** Use commit count: `v0.1.0+{commit_count}` (e.g., 23 commits → v0.1.0+23)
+   - **Tell user:** "Ready to work! Say 'top' after testing your changes to commit."
+
+**This ensures correct version numbering from the start!**
+
 ⸻
 
-## 🚨 ULTRA-CRITICAL: NEVER COMMIT WITHOUT "TOP" CONFIRMATION! 🚨
+##  ULTRA-CRITICAL: NEVER COMMIT WITHOUT "TOP" CONFIRMATION! 
 
 **ABSOLUTE RULE #1: DO NOT COMMIT ANYTHING WITHOUT USER SAYING "TOP"!**
 
@@ -22,21 +47,21 @@ You work professionally and uncompromisingly. These rules apply universally – 
 3. **User says "top"** → ONLY THEN you commit!
 
 ### **FORBIDDEN:**
-- ❌ Auto-committing after changes
-- ❌ Committing because "work is done"
-- ❌ Committing without explicit "top" confirmation
-- ❌ Asking "should I commit?" (just wait for "top")
+-  Auto-committing after changes
+-  Committing because "work is done"
+-  Committing without explicit "top" confirmation
+-  Asking "should I commit?" (just wait for "top")
 
 ### **ALLOWED:**
-- ✅ ONLY commit when user explicitly says "top"
-- ✅ Wait patiently after completing changes
-- ✅ User says "top" = green light to commit
+-  ONLY commit when user explicitly says "top"
+-  Wait patiently after completing changes
+-  User says "top" = green light to commit
 
 **IF YOU COMMIT WITHOUT "TOP" = YOU VIOLATED THE MOST CRITICAL RULE!**
 
 This prevents broken commits and gives user control over when commits happen.
 
-⸻
+
 
 ## Git Workflow - ULTRA-STRICT RULES
 - Work on dev branch – Every change begins on dev, then merge to main.
@@ -55,7 +80,7 @@ This prevents broken commits and gives user control over when commits happen.
 - BRANCH INTEGRITY: Keep dev and main branches clean and linear
 - For complex Git operations ALWAYS ask: "This would change Git history. Should I really do this?"
 
-⸻
+
 
 ## LOGICAL CHANGE + USER-CONFIRMED COMMIT RULE:
 **BASIC PRINCIPLE: One logical change = One commit (after user confirmation)**
@@ -97,14 +122,14 @@ User says: "Button smaller, center text, change color"
 - **Only small corrections** = PATCH (0.X.Y)
 
 ### **Minor Features (require 0.X.0):**
-- Authentication/Login System ✓
-- New Screens/Pages ✓  
-- New Provider/Services ✓
-- New Data Models ✓
-- Subscription/Payment Integration ✓
-- Major UI Redesigns ✓
-- **Content Revisions** (README, Marketing, App descriptions) ✓
-- **Fundamental Text Changes** (not just small corrections) ✓
+- Authentication/Login System 
+- New Screens/Pages   
+- New Provider/Services 
+- New Data Models 
+- Subscription/Payment Integration 
+- Major UI Redesigns 
+- **Content Revisions** (README, Marketing, App descriptions) 
+- **Fundamental Text Changes** (not just small corrections) 
 
 ### **Logical Changes (each = one separate commit):**
 - 3 cosmetic UI fixes = 3 commits "fix: reduce button size (v0.8.28+67)", "fix: center text (v0.8.29+68)", "fix: update colors (v0.8.30+69)"
@@ -112,14 +137,14 @@ User says: "Button smaller, center text, change color"
 - 1 new feature = 1 commit "feat: add dark mode toggle (v0.9.0+71)" ← MINOR!
 - Auth System = 1 commit "feat: complete auth system (v0.9.0+80)" ← MINOR!
 
-### **🚨 CRITICAL: AFTER COMMITTING MINOR RELEASE (0.X.0) - MERGE TO MAIN!**
+### ** CRITICAL: AFTER COMMITTING MINOR RELEASE (0.X.0) - MERGE TO MAIN!**
 
 **RULE:** Every commit with version 0.X.0 (where X changes) = IMMEDIATE merge to main!
 
 **WORKFLOW FOR MINOR RELEASES (0.X.0):**
-1. ✅ Commit on dev: `git commit -m "feat: add dark mode (v0.9.0)"`
-2. ⚠️ **STOP! This is a MINOR release (0.9.0)!**
-3. 🔄 **IMMEDIATELY merge to main:**
+1.  Commit on dev: `git commit -m "feat: add dark mode (v0.9.0)"`
+2.  **STOP! This is a MINOR release (0.9.0)!**
+3.  **IMMEDIATELY merge to main:**
    ```bash
    git checkout main
    git merge --no-ff dev
@@ -127,11 +152,11 @@ User says: "Button smaller, center text, change color"
    git push origin main --tags
    git checkout dev
    ```
-4. ✅ Continue work on dev
+4.  Continue work on dev
 
 **WHEN TO MERGE TO MAIN:**
-- ✅ **YES:** v0.6.0, v0.7.0, v0.8.0, v1.0.0 (X changes in 0.X.0)
-- ❌ **NO:** v0.6.1, v0.6.2, v0.6.33 (only Y changes in 0.X.Y)
+-  **YES:** v0.6.0, v0.7.0, v0.8.0, v1.0.0 (X changes in 0.X.0)
+-  **NO:** v0.6.1, v0.6.2, v0.6.33 (only Y changes in 0.X.Y)
 
 **CRITICAL:** 
 - For MINOR features ALWAYS use 0.X.0 instead of 0.Y.Z!
@@ -140,7 +165,7 @@ User says: "Button smaller, center text, change color"
 **NEVER:** commit without "top" confirmation or mix multiple logical changes in one commit  
 **ALWAYS:** Multiple logical changes → "top" confirmation → SEPARATE commits for each logical change = immediately
 
-⸻
+
 
 ## LOGICAL CHANGE + USER-CONFIRMED RULE VALIDATION:
 **ONE LOGICAL CHANGE, THEN "TOP" CONFIRMATION FROM USER:**
@@ -173,9 +198,9 @@ User says: "Button smaller, center text, change color"
 - Commit: `fix: ui improvements (v0.6.33+74)`
 
 **FORBIDDEN:**
-- ❌ "Invent" versions without checking Git history
-- ❌ Set low version numbers without validation
-- ❌ Commit without version validation
+-  "Invent" versions without checking Git history
+-  Set low version numbers without validation
+-  Commit without version validation
 
 ### **VERSION SEQUENCE VALIDATION:**
 **CRITICAL:** Prevent version jumps and duplicates!
@@ -199,9 +224,9 @@ User says: "Button smaller, center text, change color"
 - **MIXED**: v0.6.33+73 → v0.6.33+74 → v0.7.0+75 → v0.7.1+76
 
 **FORBIDDEN SEQUENCES:**
-- ❌ v0.6.33+73 → v0.6.33+74 → v0.6.33+75 (duplicate patch version)
-- ❌ v0.6.33+73 → v0.6.33+75 (skipped +74)
-- ❌ v0.6.33+73 → v0.6.34+75 (skipped +74)
+-  v0.6.33+73 → v0.6.33+74 → v0.6.33+75 (duplicate patch version)
+-  v0.6.33+73 → v0.6.33+75 (skipped +74)
+-  v0.6.33+73 → v0.6.34+75 (skipped +74)
 
 ### **Rule Validation Checklist:**
 - [ ] All changes belong to ONE logical unit?
@@ -238,7 +263,7 @@ User says: "Button smaller, center text, change color"
 
 **For catch-up commits ALWAYS proceed chronologically!**
 
-⸻
+
 
 ## Universal Coding Principles
 - Use const/immutable wherever possible.
@@ -250,7 +275,7 @@ User says: "Button smaller, center text, change color"
 - **Follow official documentation** of the technologies used at all times.
 - **Document complex logic**, especially where the architecture is not immediately obvious.
 
-⸻
+
 
 ## Performance Guidelines
 - Optimize for readability and maintainability.
@@ -259,7 +284,7 @@ User says: "Button smaller, center text, change color"
 - **Cleanly cancel asynchronous operations** (dispose safety).
 - **Never leave build running** and push anyway.
 
-⸻
+
 
 ## Universal Model & DB Conventions
 - Tables: created_at, updated_at, is_deleted.
@@ -267,22 +292,22 @@ User says: "Button smaller, center text, change color"
 - Clearly mark readonly fields.
 - Enums with numeric values for DB compatibility.
 
-⸻
+
 
 ## Documentation & Meta
 - Document complex logic, especially where the architecture is not immediately obvious.
 - Always follow the official documentation of the technologies used.
 - For Git: Keep README, CHANGELOG, CONTRIBUTING current.
 
-⸻
 
-## 🔴 Critical Errors – ABSOLUTELY NO GO!
 
-### **🚨 RULE #1 (MOST CRITICAL): NEVER COMMIT WITHOUT "TOP"!**
-- ❌ **FORBIDDEN:** Committing without user saying "top"
-- ❌ **FORBIDDEN:** Auto-committing after completing changes  
-- ❌ **FORBIDDEN:** Asking "should I commit?" instead of waiting for "top"
-- ✅ **ONLY ALLOWED:** Commit when user explicitly says "top"
+##  Critical Errors – ABSOLUTELY NO GO!
+
+### ** RULE #1 (MOST CRITICAL): NEVER COMMIT WITHOUT "TOP"!**
+-  **FORBIDDEN:** Committing without user saying "top"
+-  **FORBIDDEN:** Auto-committing after completing changes  
+-  **FORBIDDEN:** Asking "should I commit?" instead of waiting for "top"
+-  **ONLY ALLOWED:** Commit when user explicitly says "top"
 
 **Violating this rule = Breaking the entire workflow!**
 
@@ -300,7 +325,7 @@ User says: "Button smaller, center text, change color"
 - **VERSION SEQUENCE RULE:** No duplicate patch versions and no skipped build numbers!
 - **SEQUENCE VALIDATION:** Patch versions must be incremented sequentially!
 
-⸻
+
 
 ## Project is healthy when:
 - CI/CD green.
@@ -312,13 +337,13 @@ User says: "Button smaller, center text, change color"
 - App/System responds performantly and scales cleanly.
 - **NEW:** Working tree clean only after "top"-confirmed commits!
 
-⸻
+
 
 **Last Rule:**
 When you think: "Is that enough?" → No. Do it right. Always.
 You're not just anyone. You're the right hand of Deus Ex Machina. And your code reflects that.
 
-**🚨 ULTRA-CRITICAL RULE - READ THIS 10 TIMES: 🚨**
+** ULTRA-CRITICAL RULE - READ THIS 10 TIMES: **
 **NEVER, EVER, UNDER ANY CIRCUMSTANCES COMMIT WITHOUT USER SAYING "TOP"!**
 
 After EVERY logical change check rules, but ONLY commit after "top" confirmation!
@@ -333,14 +358,14 @@ AT EVERY NEW CHAT IMMEDIATELY (first message):
 3. For uncommitted changes: IMMEDIATELY apply all rules
 4. NEVER forget - ALWAYS do automatically!
 
-⸻
 
-## 🔴 CRITICAL REMINDERS (READ TWICE!)
+
+##  CRITICAL REMINDERS (READ TWICE!)
 
 These rules are repeated because they are CRITICAL and must NEVER be violated:
 
 ### **PROJECT TYPE DETECTION (CRITICAL!)**
-**🚨 NEVER DELETE GIT HISTORY FROM EXISTING PROJECTS! 🚨**
+** NEVER DELETE GIT HISTORY FROM EXISTING PROJECTS! **
 
 **How to detect:**
 ```bash
@@ -397,7 +422,7 @@ git branch dev
 git checkout dev
 ```
 
-**⚠️ CRITICAL: First push needs --force!**
+** CRITICAL: First push needs --force!**
 - Why? Git history was reinitialized (old remote history diverged)
 - Command: `git push origin main --force`
 - Later pushes: Normal `git push origin main`
@@ -425,13 +450,13 @@ After committing ANY version with 0.X.0 format:
 6. `git checkout dev`
 
 Examples that require merge:
-- v0.7.0 ✓ (X changed from 6 to 7)
-- v0.8.0 ✓ (X changed from 7 to 8)
-- v1.0.0 ✓ (MAJOR release)
+- v0.7.0  (X changed from 6 to 7)
+- v0.8.0  (X changed from 7 to 8)
+- v1.0.0  (MAJOR release)
 
 Examples that DON'T require merge:
-- v0.7.1 ✗ (only Y changed)
-- v0.7.2 ✗ (only Y changed)
+- v0.7.1  (only Y changed)
+- v0.7.2  (only Y changed)
 
 ### **SEMANTIC VERSIONING (CRITICAL!)**
 **CONTENT REVISIONS = MINOR, NOT PATCH!**
@@ -454,12 +479,12 @@ Good:
 **NO DUPLICATE PATCH VERSIONS! NO SKIPPED BUILD NUMBERS!**
 
 Correct sequence:
-- v0.6.33+73 → v0.6.33+74 → v0.6.34+75 ✓
+- v0.6.33+73 → v0.6.33+74 → v0.6.34+75 
 
 Wrong sequences:
-- v0.6.33+73 → v0.6.33+74 → v0.6.33+75 ✗ (duplicate patch)
-- v0.6.33+73 → v0.6.33+75 ✗ (skipped +74)
+- v0.6.33+73 → v0.6.33+74 → v0.6.33+75  (duplicate patch)
+- v0.6.33+73 → v0.6.33+75  (skipped +74)
 
-⸻
+
 
 **These rules are non-negotiable. Follow them EXACTLY. Every time. No exceptions.**
