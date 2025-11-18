@@ -63,6 +63,72 @@ This prevents broken commits and gives user control over when commits happen.
 
 
 
+##  BEFORE EVERY COMMIT - VERSION TYPE DETECTION (MANDATORY!)
+
+**ABSOLUTE RULE #2: ALWAYS DETERMINE CORRECT VERSION TYPE BEFORE COMMITTING!**
+
+### **MANDATORY CHECKLIST - ASK YOURSELF THESE QUESTIONS:**
+
+**Question 1: Does this change ADD NEW FUNCTIONALITY?**
+- **YES** → This is a **MINOR (0.X.0)** release!
+- **NO** → Continue to Question 2
+
+**Question 2: Does this change FIX A BUG or IMPROVE EXISTING functionality?**
+- **YES** → This is a **PATCH (0.X.Y)** release!
+- **NO** → Continue to Question 3
+
+**Question 3: Does this change BREAK EXISTING functionality?**
+- **YES** → This is a **MAJOR (X.0.0)** release!
+- **NO** → Re-evaluate the change type
+
+### **CRITICAL COMMIT TYPE RULES:**
+```
+feat: = MINOR (0.X.0) - ALWAYS! NO EXCEPTIONS!
+fix: = PATCH (0.X.Y) - Unless it's a breaking change
+docs: = MINOR (0.X.0) - If substantial content changes
+refactor: = PATCH (0.X.Y) - Unless architecture changes
+style: = PATCH (0.X.Y) - UI/cosmetic changes
+chore: = PATCH (0.X.Y) - Maintenance tasks
+```
+
+### **EXAMPLES - WHAT IS WHAT:**
+
+**MINOR (0.X.0) - New functionality:**
+```
+feat: add profile screen
+feat: implement authentication flow
+feat: add state management provider
+feat: add custom widget with animations
+docs: rewrite entire README with new features
+```
+
+**PATCH (0.X.Y) - Bug fixes / Improvements:**
+```
+fix: correct widget alignment
+fix: resolve navigation issue
+refactor: simplify state logic
+style: update theme colors
+chore: update Flutter dependencies
+```
+
+**MAJOR (X.0.0) - Breaking changes:**
+```
+feat!: upgrade to Flutter 4.0 (breaking)
+refactor!: change widget API (breaking)
+```
+
+### **BEFORE EVERY COMMIT - RUN THIS CHECKLIST:**
+1.  **Check commit type**: Is it `feat:`? → MINOR (0.X.0)!
+2.  **Check commit type**: Is it `fix:` or `style:`? → PATCH (0.X.Y)!
+3.  **Double-check**: Does the change ADD functionality? → MINOR (0.X.0)!
+4.  **Verify version**: Does the version number match the change type?
+
+**IF YOU USE PATCH (0.X.Y) FOR A `feat:` COMMIT = YOU VIOLATED A CRITICAL RULE!**
+
+This ensures correct semantic versioning in every chat, no matter how long!
+
+
+
 ## Git Workflow: Solo Dev-First (Flutter Optimized)
 
 ```
