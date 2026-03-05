@@ -24,8 +24,8 @@ Write-Host ""
 Write-InfoMsg "Professional Git workflows for AI-assisted development"
 Write-Host ""
 
-# Get script directory
-$SCRIPT_DIR = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+# Get script directory (.vasgit folder = one level up from scripts/)
+$SCRIPT_DIR = Split-Path -Parent $PSScriptRoot
 if (-not $SCRIPT_DIR) {
     $SCRIPT_DIR = Join-Path $PSScriptRoot ".."
     $SCRIPT_DIR = (Resolve-Path $SCRIPT_DIR).Path
