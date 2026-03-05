@@ -21,7 +21,7 @@ A **template repository** with battle-tested development workflow templates for 
 2. Create your new repository
 3. Clone it: `git clone <your-repo>`
 4. Run setup:
-   - **Windows**: `setup.bat` (auto-detects PowerShell or Git Bash)
+   - **Windows**: `.\setup.bat` (auto-detects PowerShell or Git Bash)
    - **Linux/Mac**: `bash .vasgit/scripts/setup.sh`
 5. Setup automatically cleans up unnecessary files
 
